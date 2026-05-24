@@ -696,6 +696,199 @@
       box-shadow: none;
     }
 
+    /* ── Contact Form ── */
+    .contact {
+      padding: 96px 0;
+      background: #f5f7fb;
+      border-top: 1px solid #e8eef8;
+      border-bottom: 1px solid #e8eef8;
+    }
+
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .contact-info { }
+
+    .contact-info h3 {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #0d1b34;
+      margin: 16px 0 14px;
+      word-break: keep-all;
+      line-height: 1.35;
+    }
+
+    .contact-info p {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.75;
+      word-break: keep-all;
+      margin: 0 0 28px;
+    }
+
+    .contact-points {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .contact-point {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #334155;
+    }
+
+    .contact-point-icon {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      background: var(--blue-soft);
+      font-size: 17px;
+      flex-shrink: 0;
+    }
+
+    .contact-form-wrap {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 36px;
+      box-shadow: 0 12px 34px rgba(15, 23, 42, 0.06);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      margin-bottom: 14px;
+    }
+
+    .form-group.full { grid-column: 1 / -1; }
+
+    .form-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: #374151;
+    }
+
+    .form-label .required {
+      color: #ef4444;
+      margin-left: 3px;
+    }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 12px;
+      font-size: 14px;
+      font-family: inherit;
+      color: var(--ink);
+      background: #fff;
+      outline: none;
+      transition: border-color 0.18s, box-shadow 0.18s;
+      appearance: none;
+    }
+
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(31, 94, 255, 0.1);
+    }
+
+    .form-select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2364748b' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+      cursor: pointer;
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 120px;
+      line-height: 1.6;
+    }
+
+    .form-submit {
+      width: 100%;
+      padding: 15px;
+      border: 0;
+      border-radius: 14px;
+      font-size: 15px;
+      font-weight: 800;
+      color: #fff;
+      background: linear-gradient(145deg, var(--navy), var(--blue));
+      box-shadow: 0 10px 28px rgba(8, 35, 92, 0.22);
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      font-family: inherit;
+      margin-top: 6px;
+    }
+
+    .form-submit:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(8, 35, 92, 0.3); }
+    .form-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+    .form-notice {
+      font-size: 12px;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 12px;
+      line-height: 1.6;
+    }
+
+    /* success / error state */
+    .form-result {
+      display: none;
+      padding: 16px 20px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .form-result.success {
+      display: block;
+      background: #ecfdf5;
+      color: #065f46;
+      border: 1px solid #a7f3d0;
+    }
+
+    .form-result.error {
+      display: block;
+      background: #fff1f2;
+      color: #9f1239;
+      border: 1px solid #fecdd3;
+    }
+
+    @media (max-width: 980px) {
+      .contact-inner { grid-template-columns: 1fr; gap: 36px; }
+    }
+
+    @media (max-width: 640px) {
+      .form-row { grid-template-columns: 1fr; }
+      .contact-form-wrap { padding: 24px; }
+    }
+
     /* ── Footer ── */
     footer { border-top: 1px solid #e8eef8; background: #fff; }
 
@@ -784,6 +977,7 @@
         <a href="#curation" data-i18n="nav.curation">AI 큐레이션</a>
         <a href="#products" data-i18n="nav.products">추천 상품</a>
         <a href="#reviews" data-i18n="nav.reviews">후기</a>
+        <a href="#contact" data-i18n="nav.contact">제휴 문의</a>
       </nav>
 
       <div class="nav-right">
@@ -1045,6 +1239,104 @@
       </div>
     </section>
 
+    <!-- ══ CONTACT FORM ══ -->
+    <section class="contact" id="contact">
+      <div class="shell">
+        <div class="contact-inner">
+
+          <!-- Left: Info -->
+          <div class="contact-info">
+            <div class="section-eyebrow" data-i18n="contact.eyebrow">제휴 문의</div>
+            <h3 data-i18n="contact.title">PawPick AI와 함께<br/>성장할 파트너를 찾습니다</h3>
+            <p data-i18n="contact.desc">브랜드·수의사·반려동물 전문가·유통사 등 다양한 형태의 제휴를 환영합니다. 아래 폼을 작성해 주시면 영업일 기준 2일 이내 답변드립니다.</p>
+            <div class="contact-points">
+              <div class="contact-point">
+                <span class="contact-point-icon">🛒</span>
+                <span data-i18n="contact.pt1">상품 입점 · 커머스 제휴</span>
+              </div>
+              <div class="contact-point">
+                <span class="contact-point-icon">🏥</span>
+                <span data-i18n="contact.pt2">수의사 · 전문가 협력</span>
+              </div>
+              <div class="contact-point">
+                <span class="contact-point-icon">📣</span>
+                <span data-i18n="contact.pt3">마케팅 · 콘텐츠 협업</span>
+              </div>
+              <div class="contact-point">
+                <span class="contact-point-icon">💼</span>
+                <span data-i18n="contact.pt4">투자 · 기타 비즈니스 문의</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Form -->
+          <div class="contact-form-wrap">
+            <div id="formResult" class="form-result"></div>
+
+            <form id="contactForm" action="https://formspree.io/f/mykvprdg" method="POST" novalidate>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="fname">
+                    <span data-i18n="contact.form.name">이름</span><span class="required">*</span>
+                  </label>
+                  <input class="form-input" id="fname" type="text" name="name"
+                    data-i18n-placeholder="contact.form.namePh" placeholder="홍길동" required />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="fcompany">
+                    <span data-i18n="contact.form.company">회사·기관명</span>
+                  </label>
+                  <input class="form-input" id="fcompany" type="text" name="company"
+                    data-i18n-placeholder="contact.form.companyPh" placeholder="(주)펫케어" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="femail">
+                  <span data-i18n="contact.form.email">이메일</span><span class="required">*</span>
+                </label>
+                <input class="form-input" id="femail" type="email" name="email"
+                  data-i18n-placeholder="contact.form.emailPh" placeholder="hello@example.com" required />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="ftype">
+                  <span data-i18n="contact.form.type">문의 유형</span><span class="required">*</span>
+                </label>
+                <select class="form-select" id="ftype" name="inquiry_type" required>
+                  <option value="" data-i18n="contact.form.typeDefault">유형을 선택해 주세요</option>
+                  <option value="commerce" data-i18n="contact.form.type1">상품 입점 · 커머스 제휴</option>
+                  <option value="vet" data-i18n="contact.form.type2">수의사 · 전문가 협력</option>
+                  <option value="marketing" data-i18n="contact.form.type3">마케팅 · 콘텐츠 협업</option>
+                  <option value="investment" data-i18n="contact.form.type4">투자 · 기타 비즈니스</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="fmsg">
+                  <span data-i18n="contact.form.message">문의 내용</span><span class="required">*</span>
+                </label>
+                <textarea class="form-textarea" id="fmsg" name="message"
+                  data-i18n-placeholder="contact.form.messagePh"
+                  placeholder="제휴 목적, 규모, 희망 협력 방식 등을 자유롭게 적어주세요." required></textarea>
+              </div>
+
+              <!-- honeypot spam protection -->
+              <input type="text" name="_gotcha" style="display:none" />
+
+              <button class="form-submit" type="submit" id="formSubmit" data-i18n="contact.form.submit">
+                문의 보내기 →
+              </button>
+              <p class="form-notice" data-i18n="contact.form.notice">
+                영업일 기준 2일 이내 이메일로 답변드립니다.
+              </p>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
     <!-- ══ FINAL CTA ══ -->
     <section class="cta">
       <div class="shell">
@@ -1168,6 +1460,36 @@
 
         'footer.copy': '© 2026 PawPick AI. All rights reserved.',
 
+        'nav.contact': '제휴 문의',
+
+        'contact.eyebrow': '제휴 문의',
+        'contact.title': 'PawPick AI와 함께\n성장할 파트너를 찾습니다',
+        'contact.desc': '브랜드·수의사·반려동물 전문가·유통사 등 다양한 형태의 제휴를 환영합니다. 아래 폼을 작성해 주시면 영업일 기준 2일 이내 답변드립니다.',
+        'contact.pt1': '상품 입점 · 커머스 제휴',
+        'contact.pt2': '수의사 · 전문가 협력',
+        'contact.pt3': '마케팅 · 콘텐츠 협업',
+        'contact.pt4': '투자 · 기타 비즈니스 문의',
+        'contact.form.name': '이름',
+        'contact.form.namePh': '홍길동',
+        'contact.form.company': '회사·기관명',
+        'contact.form.companyPh': '(주)펫케어',
+        'contact.form.email': '이메일',
+        'contact.form.emailPh': 'hello@example.com',
+        'contact.form.type': '문의 유형',
+        'contact.form.typeDefault': '유형을 선택해 주세요',
+        'contact.form.type1': '상품 입점 · 커머스 제휴',
+        'contact.form.type2': '수의사 · 전문가 협력',
+        'contact.form.type3': '마케팅 · 콘텐츠 협업',
+        'contact.form.type4': '투자 · 기타 비즈니스',
+        'contact.form.message': '문의 내용',
+        'contact.form.messagePh': '제휴 목적, 규모, 희망 협력 방식 등을 자유롭게 적어주세요.',
+        'contact.form.submit': '문의 보내기 →',
+        'contact.form.notice': '영업일 기준 2일 이내 이메일로 답변드립니다.',
+        'contact.form.sending': '전송 중...',
+        'contact.form.success': '✅ 문의가 성공적으로 전송되었습니다! 빠른 시일 내 연락드리겠습니다.',
+        'contact.form.error': '❌ 전송 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.',
+        'contact.form.required': '필수 항목을 모두 입력해 주세요.',
+
         'result.header': 'AI 분석 결과',
         'result.inputLabel': '입력한 고민',
         'result.causesLabel': '예상 원인',
@@ -1277,6 +1599,36 @@
 
         'footer.copy': '© 2026 PawPick AI. All rights reserved.',
 
+        'nav.contact': 'Partnership',
+
+        'contact.eyebrow': 'PARTNERSHIP INQUIRY',
+        'contact.title': 'Looking for Partners\nto Grow with PawPick AI',
+        'contact.desc': 'We welcome partnerships with brands, veterinarians, pet experts, and distributors. Fill out the form below and we\'ll respond within 2 business days.',
+        'contact.pt1': 'Product Listing · Commerce',
+        'contact.pt2': 'Veterinarian · Expert Collaboration',
+        'contact.pt3': 'Marketing · Content Partnership',
+        'contact.pt4': 'Investment · Other Business',
+        'contact.form.name': 'Name',
+        'contact.form.namePh': 'John Doe',
+        'contact.form.company': 'Company / Organization',
+        'contact.form.companyPh': 'PetCare Inc.',
+        'contact.form.email': 'Email',
+        'contact.form.emailPh': 'hello@example.com',
+        'contact.form.type': 'Inquiry Type',
+        'contact.form.typeDefault': 'Select inquiry type',
+        'contact.form.type1': 'Product Listing · Commerce',
+        'contact.form.type2': 'Veterinarian · Expert Collaboration',
+        'contact.form.type3': 'Marketing · Content Partnership',
+        'contact.form.type4': 'Investment · Other Business',
+        'contact.form.message': 'Message',
+        'contact.form.messagePh': 'Please describe your partnership goals, scale, and preferred collaboration method.',
+        'contact.form.submit': 'Send Inquiry →',
+        'contact.form.notice': 'We\'ll reply to your email within 2 business days.',
+        'contact.form.sending': 'Sending...',
+        'contact.form.success': '✅ Your inquiry has been sent! We\'ll get back to you soon.',
+        'contact.form.error': '❌ Something went wrong. Please try again later.',
+        'contact.form.required': 'Please fill in all required fields.',
+
         'result.header': 'AI Analysis Result',
         'result.inputLabel': 'Your concern',
         'result.causesLabel': 'Possible Causes',
@@ -1315,6 +1667,11 @@
       /* placeholder */
       document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
         el.placeholder = t(el.dataset.i18nPlaceholder);
+      });
+
+      /* select options */
+      document.querySelectorAll('option[data-i18n]').forEach(el => {
+        el.textContent = t(el.dataset.i18n);
       });
 
       /* Update input default value to match language */
@@ -1383,6 +1740,60 @@
     function scrollToCuration() {
       document.getElementById('curation').scrollIntoView({ behavior: 'smooth' });
     }
+
+    /* ════════════════════════════════════
+       Formspree – Contact Form Submit
+    ════════════════════════════════════ */
+    const contactForm = document.getElementById('contactForm');
+    const formResult  = document.getElementById('formResult');
+    const formSubmit  = document.getElementById('formSubmit');
+
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      /* Client-side validation */
+      const name  = contactForm.name.value.trim();
+      const email = contactForm.email.value.trim();
+      const type  = contactForm.inquiry_type.value;
+      const msg   = contactForm.message.value.trim();
+
+      formResult.className = 'form-result';
+      formResult.textContent = '';
+
+      if (!name || !email || !type || !msg) {
+        formResult.textContent = t('contact.form.required');
+        formResult.classList.add('error');
+        formResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        return;
+      }
+
+      /* Send to Formspree */
+      formSubmit.disabled = true;
+      formSubmit.textContent = t('contact.form.sending');
+
+      try {
+        const res = await fetch(contactForm.action, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: new FormData(contactForm),
+        });
+
+        if (res.ok) {
+          formResult.textContent = t('contact.form.success');
+          formResult.classList.add('success');
+          contactForm.reset();
+        } else {
+          throw new Error('server error');
+        }
+      } catch {
+        formResult.textContent = t('contact.form.error');
+        formResult.classList.add('error');
+      } finally {
+        formSubmit.disabled = false;
+        formSubmit.textContent = t('contact.form.submit');
+        formResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    });
 
     /* ── Init ── */
     initChips();
