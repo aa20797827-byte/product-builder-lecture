@@ -23,13 +23,8 @@
       --radius: 22px;
     }
 
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
@@ -42,21 +37,15 @@
       overflow-x: hidden;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button,
-    input {
-      font-family: inherit;
-    }
+    a { color: inherit; text-decoration: none; }
+    button, input { font-family: inherit; }
 
     .shell {
       width: min(1200px, calc(100% - 40px));
       margin: 0 auto;
     }
 
+    /* ── Navbar ── */
     .navbar {
       position: sticky;
       top: 0;
@@ -71,7 +60,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 28px;
+      gap: 20px;
     }
 
     .brand {
@@ -81,6 +70,7 @@
       font-weight: 900;
       letter-spacing: -0.04em;
       color: var(--navy);
+      flex-shrink: 0;
     }
 
     .logo {
@@ -103,14 +93,53 @@
       color: #475569;
       font-size: 14px;
       font-weight: 700;
+      flex: 1;
+      justify-content: center;
     }
 
-    .nav-actions {
+    .nav-links a:hover { color: var(--navy); }
+
+    .nav-right {
       display: flex;
       align-items: center;
       gap: 10px;
+      flex-shrink: 0;
     }
 
+    /* ── Lang Toggle ── */
+    .lang-toggle {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      padding: 4px;
+      border: 1px solid #d8e1ee;
+      border-radius: 12px;
+      background: #fff;
+    }
+
+    .lang-btn {
+      min-height: 32px;
+      padding: 0 12px;
+      border: 0;
+      border-radius: 8px;
+      background: transparent;
+      color: #94a3b8;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      letter-spacing: 0.04em;
+      transition: all 0.18s ease;
+    }
+
+    .lang-btn.active {
+      background: var(--navy);
+      color: #fff;
+      box-shadow: 0 4px 10px rgba(8, 35, 92, 0.2);
+    }
+
+    .lang-btn:not(.active):hover { color: var(--navy); background: var(--blue-soft); }
+
+    /* ── Buttons ── */
     .btn {
       display: inline-flex;
       align-items: center;
@@ -126,9 +155,7 @@
       transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
     }
 
-    .btn:hover {
-      transform: translateY(-2px);
-    }
+    .btn:hover { transform: translateY(-2px); }
 
     .btn-outline {
       color: var(--navy);
@@ -142,6 +169,7 @@
       box-shadow: 0 14px 32px rgba(8, 35, 92, 0.22);
     }
 
+    /* ── Hero ── */
     .hero {
       position: relative;
       min-height: 720px;
@@ -191,10 +219,7 @@
       font-weight: 520;
     }
 
-    .hero-copy b {
-      color: var(--navy);
-      font-weight: 900;
-    }
+    .hero-copy b { color: var(--navy); font-weight: 900; }
 
     .hero-actions {
       display: flex;
@@ -213,10 +238,7 @@
       font-weight: 650;
     }
 
-    .avatar-row {
-      display: flex;
-      align-items: center;
-    }
+    .avatar-row { display: flex; align-items: center; }
 
     .avatar {
       width: 28px;
@@ -231,19 +253,11 @@
       font-size: 13px;
     }
 
-    .avatar:first-child {
-      margin-left: 0;
-    }
+    .avatar:first-child { margin-left: 0; }
+    .rating { color: #f59e0b; font-weight: 950; }
 
-    .rating {
-      color: #f59e0b;
-      font-weight: 950;
-    }
-
-    .demo-wrap {
-      position: relative;
-      min-height: 440px;
-    }
+    /* ── Demo Card ── */
+    .demo-wrap { position: relative; min-height: 440px; }
 
     .demo-card {
       position: relative;
@@ -311,11 +325,7 @@
       font-weight: 700;
     }
 
-    .check-list {
-      display: grid;
-      gap: 10px;
-      margin: 18px 0;
-    }
+    .check-list { display: grid; gap: 10px; margin: 18px 0; }
 
     .check-item {
       display: flex;
@@ -335,9 +345,7 @@
       flex: 0 0 auto;
     }
 
-    .demo-card .btn {
-      width: 100%;
-    }
+    .demo-card .btn { width: 100%; }
 
     .floating-bubble {
       position: absolute;
@@ -353,16 +361,8 @@
       animation: bubbleFloat 5.5s ease-in-out infinite;
     }
 
-    .bubble-1 {
-      right: -8px;
-      top: -20px;
-    }
-
-    .bubble-2 {
-      left: 8px;
-      bottom: 44px;
-      animation-delay: -1.8s;
-    }
+    .bubble-1 { right: -8px; top: -20px; }
+    .bubble-2 { left: 8px; bottom: 44px; animation-delay: -1.8s; }
 
     .blob {
       position: absolute;
@@ -371,25 +371,11 @@
       opacity: 0.65;
     }
 
-    .blob-a {
-      width: 190px;
-      height: 190px;
-      right: 20px;
-      top: 20px;
-      background: rgba(31, 94, 255, 0.12);
-    }
+    .blob-a { width: 190px; height: 190px; right: 20px; top: 20px; background: rgba(31, 94, 255, 0.12); }
+    .blob-b { width: 120px; height: 120px; left: 40px; bottom: 70px; background: rgba(8, 35, 92, 0.1); }
 
-    .blob-b {
-      width: 120px;
-      height: 120px;
-      left: 40px;
-      bottom: 70px;
-      background: rgba(8, 35, 92, 0.1);
-    }
-
-    .section {
-      padding: 92px 0;
-    }
+    /* ── Sections ── */
+    .section { padding: 92px 0; }
 
     .section-head {
       text-align: center;
@@ -422,6 +408,7 @@
       font-weight: 520;
     }
 
+    /* ── Feature Grid ── */
     .feature-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -438,10 +425,7 @@
       transition: transform 0.24s ease, box-shadow 0.24s ease;
     }
 
-    .feature-card:hover {
-      transform: translateY(-8px);
-      box-shadow: var(--soft-shadow);
-    }
+    .feature-card:hover { transform: translateY(-8px); box-shadow: var(--soft-shadow); }
 
     .feature-icon {
       width: 42px;
@@ -460,20 +444,10 @@
     .icon-red { background: #fff1f2; }
     .icon-pink { background: #fdf2f8; }
 
-    .feature-card h3 {
-      margin: 0 0 10px;
-      font-size: 18px;
-      letter-spacing: -0.04em;
-    }
+    .feature-card h3 { margin: 0 0 10px; font-size: 18px; letter-spacing: -0.04em; }
+    .feature-card p { margin: 0; color: var(--muted); line-height: 1.68; font-size: 14px; font-weight: 520; }
 
-    .feature-card p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.68;
-      font-size: 14px;
-      font-weight: 520;
-    }
-
+    /* ── Curation ── */
     .curation {
       padding: 96px 0;
       background: #f5f7fb;
@@ -481,11 +455,7 @@
       border-bottom: 1px solid #e8eef8;
     }
 
-    .query-wrap {
-      max-width: 720px;
-      margin: 0 auto;
-      text-align: center;
-    }
+    .query-wrap { max-width: 720px; margin: 0 auto; text-align: center; }
 
     .chips {
       display: flex;
@@ -507,8 +477,7 @@
       transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
     }
 
-    .chip:hover,
-    .chip.active {
+    .chip:hover, .chip.active {
       color: #fff;
       border-color: var(--navy);
       background: var(--navy);
@@ -551,29 +520,23 @@
       white-space: pre-wrap;
     }
 
-    .result-preview.show {
-      display: block;
-    }
+    .result-preview.show { display: block; }
 
-    .products-grid,
-    .reviews-grid {
+    /* ── Products / Reviews ── */
+    .products-grid, .reviews-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 20px;
     }
 
-    .product-card,
-    .review-card,
-    .stat-card {
+    .product-card, .review-card, .stat-card {
       border: 1px solid var(--line);
       border-radius: 24px;
       background: #fff;
       box-shadow: 0 12px 34px rgba(15, 23, 42, 0.045);
     }
 
-    .product-card {
-      overflow: hidden;
-    }
+    .product-card { overflow: hidden; }
 
     .product-image {
       height: 170px;
@@ -585,9 +548,7 @@
       font-size: 64px;
     }
 
-    .product-body {
-      padding: 20px;
-    }
+    .product-body { padding: 20px; }
 
     .product-type {
       width: fit-content;
@@ -600,18 +561,8 @@
       font-weight: 850;
     }
 
-    .product-body h3 {
-      margin: 0 0 8px;
-      font-size: 18px;
-      letter-spacing: -0.04em;
-    }
-
-    .product-body p {
-      margin: 0 0 14px;
-      color: var(--muted);
-      line-height: 1.6;
-      font-size: 14px;
-    }
+    .product-body h3 { margin: 0 0 8px; font-size: 18px; letter-spacing: -0.04em; }
+    .product-body p { margin: 0 0 14px; color: var(--muted); line-height: 1.6; font-size: 14px; }
 
     .price-row {
       display: flex;
@@ -631,9 +582,7 @@
       font-weight: 850;
     }
 
-    .review-card {
-      padding: 22px;
-    }
+    .review-card { padding: 22px; }
 
     .review-top {
       display: flex;
@@ -643,12 +592,7 @@
       margin-bottom: 16px;
     }
 
-    .review-user {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      font-weight: 900;
-    }
+    .review-user { display: flex; gap: 10px; align-items: center; font-weight: 900; }
 
     .user-icon {
       width: 34px;
@@ -659,26 +603,9 @@
       background: #eef4ff;
     }
 
-    .review-user small {
-      display: block;
-      margin-top: 3px;
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 650;
-    }
-
-    .stars {
-      color: var(--yellow);
-      font-size: 13px;
-      white-space: nowrap;
-    }
-
-    .review-card p {
-      margin: 0 0 14px;
-      color: #475569;
-      line-height: 1.7;
-      font-size: 14px;
-    }
+    .review-user small { display: block; margin-top: 3px; color: var(--muted); font-size: 12px; font-weight: 650; }
+    .stars { color: var(--yellow); font-size: 13px; white-space: nowrap; }
+    .review-card p { margin: 0 0 14px; color: #475569; line-height: 1.7; font-size: 14px; }
 
     .tag {
       width: fit-content;
@@ -690,6 +617,7 @@
       font-weight: 850;
     }
 
+    /* ── Stats ── */
     .stats {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -697,10 +625,7 @@
       margin-top: 44px;
     }
 
-    .stat-card {
-      padding: 24px;
-      text-align: center;
-    }
+    .stat-card { padding: 24px; text-align: center; }
 
     .stat-card strong {
       display: block;
@@ -710,15 +635,10 @@
       letter-spacing: -0.06em;
     }
 
-    .stat-card span {
-      color: var(--muted);
-      font-size: 13px;
-      font-weight: 750;
-    }
+    .stat-card span { color: var(--muted); font-size: 13px; font-weight: 750; }
 
-    .cta {
-      padding: 96px 0;
-    }
+    /* ── CTA ── */
+    .cta { padding: 96px 0; }
 
     .cta-box {
       position: relative;
@@ -769,10 +689,8 @@
       box-shadow: none;
     }
 
-    footer {
-      border-top: 1px solid #e8eef8;
-      background: #fff;
-    }
+    /* ── Footer ── */
+    footer { border-top: 1px solid #e8eef8; background: #fff; }
 
     .footer-inner {
       min-height: 90px;
@@ -785,6 +703,7 @@
       font-weight: 700;
     }
 
+    /* ── Animations ── */
     @keyframes floatCard {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-12px); }
@@ -795,10 +714,9 @@
       50% { transform: translateY(-10px); }
     }
 
+    /* ── Responsive ── */
     @media (max-width: 980px) {
-      .nav-links {
-        display: none;
-      }
+      .nav-links { display: none; }
 
       .hero {
         grid-template-columns: 1fr;
@@ -806,85 +724,35 @@
         min-height: auto;
       }
 
-      .demo-card {
-        margin: 0 auto;
-      }
+      .demo-card { margin: 0 auto; }
 
-      .feature-grid,
-      .products-grid,
-      .reviews-grid,
-      .stats {
+      .feature-grid, .products-grid, .reviews-grid, .stats {
         grid-template-columns: 1fr 1fr;
       }
     }
 
     @media (max-width: 640px) {
-      .shell {
-        width: min(100% - 28px, 1200px);
-      }
+      .shell { width: min(100% - 28px, 1200px); }
+      .nav-inner { height: 70px; }
+      .brand { font-size: 18px; }
+      .logo { width: 34px; height: 34px; border-radius: 12px; }
+      .nav-right .btn-outline { display: none; }
 
-      .nav-inner {
-        height: 70px;
-      }
+      h1 { font-size: 44px; }
+      .hero { padding-top: 58px; }
+      .hero-copy { font-size: 16px; }
+      .demo-card { padding: 20px; }
+      .floating-bubble { display: none; }
 
-      .brand {
-        font-size: 18px;
-      }
-
-      .logo {
-        width: 34px;
-        height: 34px;
-        border-radius: 12px;
-      }
-
-      .nav-actions .btn-outline {
-        display: none;
-      }
-
-      h1 {
-        font-size: 44px;
-      }
-
-      .hero {
-        padding-top: 58px;
-      }
-
-      .hero-copy {
-        font-size: 16px;
-      }
-
-      .demo-card {
-        padding: 20px;
-      }
-
-      .floating-bubble {
-        display: none;
-      }
-
-      .feature-grid,
-      .products-grid,
-      .reviews-grid,
-      .stats {
+      .feature-grid, .products-grid, .reviews-grid, .stats {
         grid-template-columns: 1fr;
       }
 
-      .search-box {
-        flex-direction: column;
-      }
+      .search-box { flex-direction: column; }
+      .search-box .btn { width: 100%; }
 
-      .search-box .btn {
-        width: 100%;
-      }
-
-      .section,
-      .curation,
-      .cta {
-        padding: 70px 0;
-      }
-
-      .cta-box {
-        padding: 38px 24px;
-      }
+      .section, .curation, .cta { padding: 70px 0; }
+      .cta-box { padding: 38px 24px; }
 
       .footer-inner {
         flex-direction: column;
@@ -895,6 +763,8 @@
   </style>
 </head>
 <body>
+
+  <!-- ══ NAVBAR ══ -->
   <header class="navbar">
     <div class="shell nav-inner">
       <a class="brand" href="#top">
@@ -902,31 +772,38 @@
         <span>PawPick</span>
       </a>
 
-      <nav class="nav-links" aria-label="메인 메뉴">
-        <a href="#features">기능 소개</a>
-        <a href="#curation">AI 큐레이션</a>
-        <a href="#products">추천 상품</a>
-        <a href="#reviews">후기</a>
+      <nav class="nav-links" aria-label="Main menu">
+        <a href="#features" data-i18n="nav.features">기능 소개</a>
+        <a href="#curation" data-i18n="nav.curation">AI 큐레이션</a>
+        <a href="#products" data-i18n="nav.products">추천 상품</a>
+        <a href="#reviews" data-i18n="nav.reviews">후기</a>
       </nav>
 
-      <div class="nav-actions">
-        <a class="btn btn-outline" href="#curation">무료 체험</a>
-        <a class="btn btn-primary" href="#curation">시작하기</a>
+      <div class="nav-right">
+        <!-- Language Toggle -->
+        <div class="lang-toggle" role="group" aria-label="Language">
+          <button class="lang-btn active" id="btnKo" onclick="setLang('ko')">KO</button>
+          <button class="lang-btn" id="btnEn" onclick="setLang('en')">EN</button>
+        </div>
+        <a class="btn btn-outline" href="#curation" data-i18n="nav.free">무료 체험</a>
+        <a class="btn btn-primary" href="#curation" data-i18n="nav.start">시작하기</a>
       </div>
     </div>
   </header>
 
   <main id="top">
+
+    <!-- ══ HERO ══ -->
     <section class="shell hero">
       <div>
-        <div class="badge"><span></span>AI 기반 반려동물 맞춤 큐레이션</div>
-        <h1>내 반려동물의<br />고민을 AI가<br />해결해 드려요</h1>
-        <p class="hero-copy">
+        <div class="badge"><span></span><span data-i18n="hero.badge">AI 기반 반려동물 맞춤 큐레이션</span></div>
+        <h1 data-i18n-html="hero.h1">내 반려동물의<br />고민을 AI가<br />해결해 드려요</h1>
+        <p class="hero-copy" data-i18n-html="hero.copy">
           PawPick AI는 반려인의 생활 고민을 분석하고, 상황에 맞는 <b>해결 루틴과 검증된 상품</b>을 맞춤 추천해 드립니다.
         </p>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="#curation">AI 큐레이션 무료 체험 →</a>
-          <a class="btn btn-outline" href="#features">기능 살펴보기</a>
+          <a class="btn btn-primary" href="#curation" data-i18n="hero.cta1">AI 큐레이션 무료 체험 →</a>
+          <a class="btn btn-outline" href="#features" data-i18n="hero.cta2">기능 살펴보기</a>
         </div>
         <div class="social-proof">
           <div class="avatar-row" aria-hidden="true">
@@ -935,232 +812,574 @@
             <span class="avatar">🐾</span>
             <span class="avatar">❤️</span>
           </div>
-          <div><span class="rating">★★★★★ 4.9</span> · 12,000+ 반려인이 이미 사용 중</div>
+          <div><span class="rating">★★★★★ 4.9</span> · <span data-i18n="hero.social">12,000+ 반려인이 이미 사용 중</span></div>
         </div>
       </div>
 
       <div class="demo-wrap">
         <div class="blob blob-a"></div>
         <div class="blob blob-b"></div>
-        <div class="floating-bubble bubble-1">🐶 고양이도 OK<br /><span style="color:#94a3b8;font-weight:700;">모든 반려동물 지원</span></div>
-        <div class="floating-bubble bubble-2">98% 만족도<br /><span style="color:#94a3b8;font-weight:700;">AI 추천 정확도</span></div>
+        <div class="floating-bubble bubble-1">
+          🐶 <span data-i18n="hero.bubble1a">고양이도 OK</span><br />
+          <span style="color:#94a3b8;font-weight:700;" data-i18n="hero.bubble1b">모든 반려동물 지원</span>
+        </div>
+        <div class="floating-bubble bubble-2">
+          <span data-i18n="hero.bubble2a">98% 만족도</span><br />
+          <span style="color:#94a3b8;font-weight:700;" data-i18n="hero.bubble2b">AI 추천 정확도</span>
+        </div>
 
         <article class="demo-card">
           <div class="demo-header">
             <div class="status">
               <span class="status-icon">🐕</span>
               <div>
-                AI 분석 중...
-                <small>품종, 생활습관, 문제 상황 확인</small>
+                <span data-i18n="hero.demo.title">AI 분석 중...</span>
+                <small data-i18n="hero.demo.sub">품종, 생활습관, 문제 상황 확인</small>
               </div>
             </div>
             <span class="online"></span>
           </div>
 
           <div class="question-box">
-            반려인의 고민<br />
-            "강아지가 밤에 잘 안 먹고 자꾸 긁어요 🥺"
+            <span data-i18n="hero.demo.concern">반려인의 고민</span><br />
+            "<span data-i18n="hero.demo.concernText">강아지가 밤에 잘 안 먹고 자꾸 긁어요 🥺</span>"
           </div>
 
           <div class="check-list">
-            <div class="check-item"><span class="check-dot"></span>피부 알레르기 가능성 분석 완료</div>
-            <div class="check-item"><span class="check-dot"></span>저알러지 사료 3가지 선별</div>
-            <div class="check-item"><span class="check-dot"></span>맞춤 영양제 3가지 선별</div>
+            <div class="check-item"><span class="check-dot"></span><span data-i18n="hero.demo.check1">피부 알레르기 가능성 분석 완료</span></div>
+            <div class="check-item"><span class="check-dot"></span><span data-i18n="hero.demo.check2">저알러지 사료 3가지 선별</span></div>
+            <div class="check-item"><span class="check-dot"></span><span data-i18n="hero.demo.check3">맞춤 영양제 3가지 선별</span></div>
           </div>
 
-          <button class="btn btn-primary" type="button" onclick="scrollToCuration()">추천된 보기 →</button>
+          <button class="btn btn-primary" type="button" onclick="scrollToCuration()" data-i18n="hero.demo.btn">추천된 보기 →</button>
         </article>
       </div>
     </section>
 
+    <!-- ══ FEATURES ══ -->
     <section class="shell section" id="features">
       <div class="section-head">
-        <div class="section-eyebrow">WHY PAWPICK</div>
-        <h2 class="section-title">단순 추천을 넘어<br />문제를 해결하는 AI</h2>
-        <p class="section-desc">PawPick AI는 반려동물의 증상을 분석해 원인을 파악하고, 생활 속 실천 가능한 해결책까지 제시합니다.</p>
+        <div class="section-eyebrow" data-i18n="features.eyebrow">WHY PAWPICK</div>
+        <h2 class="section-title" data-i18n-html="features.title">단순 추천을 넘어<br />문제를 해결하는 AI</h2>
+        <p class="section-desc" data-i18n="features.desc">PawPick AI는 반려동물의 증상을 분석해 원인을 파악하고, 생활 속 실천 가능한 해결책까지 제시합니다.</p>
       </div>
 
       <div class="feature-grid">
         <article class="feature-card">
           <div class="feature-icon icon-blue">🔬</div>
-          <h3>AI 고민 분석</h3>
-          <p>자연어로 입력한 반려동물의 증상과 행동을 AI가 심층 분석합니다. 나이, 품종, 생활환경까지 고려한 정밀 진단을 제공합니다.</p>
+          <h3 data-i18n="features.f1.title">AI 고민 분석</h3>
+          <p data-i18n="features.f1.desc">자연어로 입력한 반려동물의 증상과 행동을 AI가 심층 분석합니다. 나이, 품종, 생활환경까지 고려한 정밀 진단을 제공합니다.</p>
         </article>
         <article class="feature-card">
           <div class="feature-icon icon-green">🎯</div>
-          <h3>맞춤 해결 루틴</h3>
-          <p>단순 추천이 아닌, 하루 일과에 녹아드는 구체적인 해결 루틴을 설계해 드립니다. 단계별 가이드로 바로 실천 가능합니다.</p>
+          <h3 data-i18n="features.f2.title">맞춤 해결 루틴</h3>
+          <p data-i18n="features.f2.desc">단순 추천이 아닌, 하루 일과에 녹아드는 구체적인 해결 루틴을 설계해 드립니다. 단계별 가이드로 바로 실천 가능합니다.</p>
         </article>
         <article class="feature-card">
           <div class="feature-icon icon-purple">🛍️</div>
-          <h3>검증된 상품 선별</h3>
-          <p>수의사 검토를 거친 상품 데이터베이스에서 상황에 맞는 제품만 선별합니다. 불필요한 비용 낭비를 막아드립니다.</p>
+          <h3 data-i18n="features.f3.title">검증된 상품 선별</h3>
+          <p data-i18n="features.f3.desc">수의사 검토를 거친 상품 데이터베이스에서 상황에 맞는 제품만 선별합니다. 불필요한 비용 낭비를 막아드립니다.</p>
         </article>
         <article class="feature-card">
           <div class="feature-icon icon-orange">🔄</div>
-          <h3>지속적 업데이트</h3>
-          <p>반려동물의 상태 변화에 따라 루틴과 추천 상품이 자동으로 업데이트됩니다. 성장 단계에 맞는 케어를 유지하세요.</p>
+          <h3 data-i18n="features.f4.title">지속적 업데이트</h3>
+          <p data-i18n="features.f4.desc">반려동물의 상태 변화에 따라 루틴과 추천 상품이 자동으로 업데이트됩니다. 성장 단계에 맞는 케어를 유지하세요.</p>
         </article>
         <article class="feature-card">
           <div class="feature-icon icon-red">🛡️</div>
-          <h3>전문가 검증 데이터</h3>
-          <p>국내외 수의사 및 반려동물 전문가가 검증한 정보를 기반으로 합니다. 신뢰할 수 있는 근거 기반 추천입니다.</p>
+          <h3 data-i18n="features.f5.title">전문가 검증 데이터</h3>
+          <p data-i18n="features.f5.desc">국내외 수의사 및 반려동물 전문가가 검증한 정보를 기반으로 합니다. 신뢰할 수 있는 근거 기반 추천입니다.</p>
         </article>
         <article class="feature-card">
           <div class="feature-icon icon-pink">💗</div>
-          <h3>건강 기록 관리</h3>
-          <p>반려동물의 건강 히스토리를 자동으로 기록하고 분석합니다. 장기적인 케어를 위한 스마트 리포트를 생성합니다.</p>
+          <h3 data-i18n="features.f6.title">건강 기록 관리</h3>
+          <p data-i18n="features.f6.desc">반려동물의 건강 히스토리를 자동으로 기록하고 분석합니다. 장기적인 케어를 위한 스마트 리포트를 생성합니다.</p>
         </article>
       </div>
     </section>
 
+    <!-- ══ CURATION ══ -->
     <section class="curation" id="curation">
       <div class="shell query-wrap">
-        <div class="section-eyebrow">AI 큐레이션 체험</div>
-        <h2 class="section-title">지금 바로 고민을 입력해 보세요</h2>
-        <p class="section-desc">AI가 즉시 분석하고 맞춤 해결 루틴과 추천 기준을 제안합니다.</p>
+        <div class="section-eyebrow" data-i18n="curation.eyebrow">AI 큐레이션 체험</div>
+        <h2 class="section-title" data-i18n="curation.title">지금 바로 고민을 입력해 보세요</h2>
+        <p class="section-desc" data-i18n="curation.desc">AI가 즉시 분석하고 맞춤 해결 루틴과 추천 기준을 제안합니다.</p>
 
-        <div class="chips">
-          <button class="chip" type="button">🐶 강아지가 밥을 잘 안 먹어요</button>
-          <button class="chip" type="button">🐱 고양이가 자꾸 구토를 해요</button>
-          <button class="chip" type="button">🐕 강아지 피부가 가려워요</button>
-          <button class="chip active" type="button">🐈 고양이가 밤에 울어요</button>
-          <button class="chip" type="button">🐾 강아지가 밖에만 나가면 짖어요</button>
-          <button class="chip" type="button">🐈 고양이가 화장실을 안 써요</button>
+        <div class="chips" id="chipGroup">
+          <button class="chip" type="button" data-i18n="curation.chip1">🐶 강아지가 밥을 잘 안 먹어요</button>
+          <button class="chip" type="button" data-i18n="curation.chip2">🐱 고양이가 자꾸 구토를 해요</button>
+          <button class="chip" type="button" data-i18n="curation.chip3">🐕 강아지 피부가 가려워요</button>
+          <button class="chip active" type="button" data-i18n="curation.chip4">🐈 고양이가 밤에 울어요</button>
+          <button class="chip" type="button" data-i18n="curation.chip5">🐾 강아지가 밖에만 나가면 짖어요</button>
+          <button class="chip" type="button" data-i18n="curation.chip6">🐈 고양이가 화장실을 안 써요</button>
         </div>
 
         <div class="search-box">
-          <input id="problemInput" type="text" value="고양이가 밤에 울다가 하루를 못 자요" placeholder="반려동물의 고민을 자유롭게 입력해 주세요." />
-          <button class="btn btn-primary" type="button" onclick="analyzeProblem()">분석하기</button>
+          <input id="problemInput" type="text"
+            value="고양이가 밤에 울다가 하루를 못 자요"
+            data-i18n-placeholder="curation.placeholder"
+            placeholder="반려동물의 고민을 자유롭게 입력해 주세요." />
+          <button class="btn btn-primary" type="button" onclick="analyzeProblem()" data-i18n="curation.analyze">분석하기</button>
         </div>
 
         <div id="analysisResult" class="result-preview"></div>
       </div>
     </section>
 
+    <!-- ══ PRODUCTS ══ -->
     <section class="shell section" id="products">
       <div class="section-head">
-        <div class="section-eyebrow">AI 추천 상품</div>
-        <h2 class="section-title">고민에 맞는 검증 상품</h2>
-        <p class="section-desc">문제 원인과 반려동물 상태를 기준으로 필요한 상품만 선별합니다.</p>
+        <div class="section-eyebrow" data-i18n="products.eyebrow">AI 추천 상품</div>
+        <h2 class="section-title" data-i18n="products.title">고민에 맞는 검증 상품</h2>
+        <p class="section-desc" data-i18n="products.desc">문제 원인과 반려동물 상태를 기준으로 필요한 상품만 선별합니다.</p>
       </div>
 
       <div class="products-grid">
         <article class="product-card">
           <div class="product-image">🥣</div>
           <div class="product-body">
-            <div class="product-type">AI 추천 사료</div>
-            <h3>저알러지 프리미엄 사료</h3>
-            <p>피부 가려움과 식욕 저하가 있는 반려견에게 적합한 단백질 제한형 사료입니다.</p>
-            <div class="price-row"><span>₩128,000</span><a class="mini-link" href="#curation">자세히 보기</a></div>
+            <div class="product-type" data-i18n="products.p1.type">AI 추천 사료</div>
+            <h3 data-i18n="products.p1.name">저알러지 프리미엄 사료</h3>
+            <p data-i18n="products.p1.desc">피부 가려움과 식욕 저하가 있는 반려견에게 적합한 단백질 제한형 사료입니다.</p>
+            <div class="price-row">
+              <span data-i18n="products.p1.price">₩128,000</span>
+              <a class="mini-link" href="#curation" data-i18n="products.detail">자세히 보기</a>
+            </div>
           </div>
         </article>
 
         <article class="product-card">
           <div class="product-image">💊</div>
           <div class="product-body">
-            <div class="product-type">AI 추천 영양제</div>
-            <h3>피부 장벽 오메가 케어</h3>
-            <p>건조함과 긁는 행동이 잦은 반려동물의 피부 장벽 관리를 돕는 영양제입니다.</p>
-            <div class="price-row"><span>₩89,000</span><a class="mini-link" href="#curation">자세히 보기</a></div>
+            <div class="product-type" data-i18n="products.p2.type">AI 추천 영양제</div>
+            <h3 data-i18n="products.p2.name">피부 장벽 오메가 케어</h3>
+            <p data-i18n="products.p2.desc">건조함과 긁는 행동이 잦은 반려동물의 피부 장벽 관리를 돕는 영양제입니다.</p>
+            <div class="price-row">
+              <span data-i18n="products.p2.price">₩89,000</span>
+              <a class="mini-link" href="#curation" data-i18n="products.detail">자세히 보기</a>
+            </div>
           </div>
         </article>
 
         <article class="product-card">
           <div class="product-image">🧸</div>
           <div class="product-body">
-            <div class="product-type">AI 추천 장난감</div>
-            <h3>야간 안정 노즈워크 토이</h3>
-            <p>밤에 우는 고양이와 분리불안 반려동물의 에너지 소모를 돕는 장난감입니다.</p>
-            <div class="price-row"><span>₩18,900</span><a class="mini-link" href="#curation">자세히 보기</a></div>
+            <div class="product-type" data-i18n="products.p3.type">AI 추천 장난감</div>
+            <h3 data-i18n="products.p3.name">야간 안정 노즈워크 토이</h3>
+            <p data-i18n="products.p3.desc">밤에 우는 고양이와 분리불안 반려동물의 에너지 소모를 돕는 장난감입니다.</p>
+            <div class="price-row">
+              <span data-i18n="products.p3.price">₩18,900</span>
+              <a class="mini-link" href="#curation" data-i18n="products.detail">자세히 보기</a>
+            </div>
           </div>
         </article>
       </div>
     </section>
 
+    <!-- ══ REVIEWS ══ -->
     <section class="shell section" id="reviews">
       <div class="section-head">
-        <div class="section-eyebrow">반려인 후기</div>
-        <h2 class="section-title">실제 반려인들의<br />생생한 변화</h2>
+        <div class="section-eyebrow" data-i18n="reviews.eyebrow">반려인 후기</div>
+        <h2 class="section-title" data-i18n-html="reviews.title">실제 반려인들의<br />생생한 변화</h2>
       </div>
 
       <div class="reviews-grid">
         <article class="review-card">
           <div class="review-top">
-            <div class="review-user"><span class="user-icon">👩</span><div>김지현<small>말티즈 '로로' 보호자</small></div></div>
+            <div class="review-user">
+              <span class="user-icon">👩</span>
+              <div>
+                <span data-i18n="reviews.r1.name">김지현</span>
+                <small data-i18n="reviews.r1.pet">말티즈 '로로' 보호자</small>
+              </div>
+            </div>
             <span class="stars">★★★★★</span>
           </div>
-          <p>강아지가 계속 밥을 줄여서 걱정이었는데, AI가 원인을 딱 짚어주고 루틴까지 알려줬어요. 추천 사료도 잘 맞아서 만족해요!</p>
-          <span class="tag">피부 알러지 해결</span>
+          <p data-i18n="reviews.r1.text">강아지가 계속 밥을 줄여서 걱정이었는데, AI가 원인을 딱 짚어주고 루틴까지 알려줬어요. 추천 사료도 잘 맞아서 만족해요!</p>
+          <span class="tag" data-i18n="reviews.r1.tag">피부 알러지 해결</span>
         </article>
 
         <article class="review-card">
           <div class="review-top">
-            <div class="review-user"><span class="user-icon">👨</span><div>박민준<small>스코티시폴드 '나비' 보호자</small></div></div>
+            <div class="review-user">
+              <span class="user-icon">👨</span>
+              <div>
+                <span data-i18n="reviews.r2.name">박민준</span>
+                <small data-i18n="reviews.r2.pet">스코티시폴드 '나비' 보호자</small>
+              </div>
+            </div>
             <span class="stars">★★★★★</span>
           </div>
-          <p>고양이가 밤에 자꾸 울어서 잠을 못 잤는데, 놀이 루틴과 환경을 바꾸니 확실히 나아졌어요.</p>
-          <span class="tag">야간 울음 개선</span>
+          <p data-i18n="reviews.r2.text">고양이가 밤에 자꾸 울어서 잠을 못 잤는데, 놀이 루틴과 환경을 바꾸니 확실히 나아졌어요.</p>
+          <span class="tag" data-i18n="reviews.r2.tag">야간 울음 개선</span>
         </article>
 
         <article class="review-card">
           <div class="review-top">
-            <div class="review-user"><span class="user-icon">👩</span><div>이수아<small>요크셔테리어 '몽이' 보호자</small></div></div>
+            <div class="review-user">
+              <span class="user-icon">👩</span>
+              <div>
+                <span data-i18n="reviews.r3.name">이수아</span>
+                <small data-i18n="reviews.r3.pet">요크셔테리어 '몽이' 보호자</small>
+              </div>
+            </div>
             <span class="stars">★★★★★</span>
           </div>
-          <p>상품만 추천해주는 게 아니라 생활 루틴을 같이 알려줘서 진짜 도움이 됐어요. 수의사 선생님도 잘 관리하고 있다고 하셨어요!</p>
-          <span class="tag">생활 루틴 개선</span>
+          <p data-i18n="reviews.r3.text">상품만 추천해주는 게 아니라 생활 루틴을 같이 알려줘서 진짜 도움이 됐어요. 수의사 선생님도 잘 관리하고 있다고 하셨어요!</p>
+          <span class="tag" data-i18n="reviews.r3.tag">생활 루틴 개선</span>
         </article>
       </div>
 
       <div class="stats">
-        <div class="stat-card"><strong>12,000+</strong><span>누적 사용자</span></div>
-        <div class="stat-card"><strong>98%</strong><span>만족도</span></div>
-        <div class="stat-card"><strong>750+</strong><span>검증 상품</span></div>
-        <div class="stat-card"><strong>4.9★</strong><span>평균 평점</span></div>
+        <div class="stat-card"><strong>12,000+</strong><span data-i18n="stats.users">누적 사용자</span></div>
+        <div class="stat-card"><strong>98%</strong><span data-i18n="stats.satisfaction">만족도</span></div>
+        <div class="stat-card"><strong>750+</strong><span data-i18n="stats.products">검증 상품</span></div>
+        <div class="stat-card"><strong>4.9★</strong><span data-i18n="stats.rating">평균 평점</span></div>
       </div>
     </section>
 
+    <!-- ══ FINAL CTA ══ -->
     <section class="cta">
       <div class="shell">
         <div class="cta-box">
-          <h2>우리 아이에게 맞는<br />AI 케어를 시작해 보세요</h2>
-          <p>반려동물의 작은 신호도 놓치지 않도록, PawPick AI가 고민 분석부터 해결 루틴까지 함께합니다.</p>
-          <a class="btn" href="#curation">무료로 시작하기 →</a>
+          <h2 data-i18n-html="cta.title">우리 아이에게 맞는<br />AI 케어를 시작해 보세요</h2>
+          <p data-i18n="cta.desc">반려동물의 작은 신호도 놓치지 않도록, PawPick AI가 고민 분석부터 해결 루틴까지 함께합니다.</p>
+          <a class="btn" href="#curation" data-i18n="cta.btn">무료로 시작하기 →</a>
         </div>
       </div>
     </section>
+
   </main>
 
   <footer>
     <div class="shell footer-inner">
-      <div>© 2026 PawPick AI. All rights reserved.</div>
+      <div data-i18n="footer.copy">© 2026 PawPick AI. All rights reserved.</div>
       <div>Problem-first · AI Curation · Pet Care</div>
     </div>
   </footer>
 
   <script>
-    const chips = document.querySelectorAll('.chip');
-    const problemInput = document.getElementById('problemInput');
-    const analysisResult = document.getElementById('analysisResult');
+    /* ════════════════════════════════════
+       i18n – Translation Dictionary
+    ════════════════════════════════════ */
+    const translations = {
+      ko: {
+        'nav.features': '기능 소개',
+        'nav.curation': 'AI 큐레이션',
+        'nav.products': '추천 상품',
+        'nav.reviews': '후기',
+        'nav.free': '무료 체험',
+        'nav.start': '시작하기',
 
-    chips.forEach((chip) => {
-      chip.addEventListener('click', () => {
-        chips.forEach((item) => item.classList.remove('active'));
-        chip.classList.add('active');
-        problemInput.value = chip.textContent.replace(/[🐶🐱🐕🐈🐾]/g, '').trim();
+        'hero.badge': 'AI 기반 반려동물 맞춤 큐레이션',
+        'hero.h1': '내 반려동물의<br />고민을 AI가<br />해결해 드려요',
+        'hero.copy': 'PawPick AI는 반려인의 생활 고민을 분석하고, 상황에 맞는 <b>해결 루틴과 검증된 상품</b>을 맞춤 추천해 드립니다.',
+        'hero.cta1': 'AI 큐레이션 무료 체험 →',
+        'hero.cta2': '기능 살펴보기',
+        'hero.social': '12,000+ 반려인이 이미 사용 중',
+        'hero.bubble1a': '고양이도 OK',
+        'hero.bubble1b': '모든 반려동물 지원',
+        'hero.bubble2a': '98% 만족도',
+        'hero.bubble2b': 'AI 추천 정확도',
+        'hero.demo.title': 'AI 분석 중...',
+        'hero.demo.sub': '품종, 생활습관, 문제 상황 확인',
+        'hero.demo.concern': '반려인의 고민',
+        'hero.demo.concernText': '강아지가 밤에 잘 안 먹고 자꾸 긁어요 🥺',
+        'hero.demo.check1': '피부 알레르기 가능성 분석 완료',
+        'hero.demo.check2': '저알러지 사료 3가지 선별',
+        'hero.demo.check3': '맞춤 영양제 3가지 선별',
+        'hero.demo.btn': '추천된 보기 →',
+
+        'features.eyebrow': 'WHY PAWPICK',
+        'features.title': '단순 추천을 넘어<br />문제를 해결하는 AI',
+        'features.desc': 'PawPick AI는 반려동물의 증상을 분석해 원인을 파악하고, 생활 속 실천 가능한 해결책까지 제시합니다.',
+        'features.f1.title': 'AI 고민 분석',
+        'features.f1.desc': '자연어로 입력한 반려동물의 증상과 행동을 AI가 심층 분석합니다. 나이, 품종, 생활환경까지 고려한 정밀 진단을 제공합니다.',
+        'features.f2.title': '맞춤 해결 루틴',
+        'features.f2.desc': '단순 추천이 아닌, 하루 일과에 녹아드는 구체적인 해결 루틴을 설계해 드립니다. 단계별 가이드로 바로 실천 가능합니다.',
+        'features.f3.title': '검증된 상품 선별',
+        'features.f3.desc': '수의사 검토를 거친 상품 데이터베이스에서 상황에 맞는 제품만 선별합니다. 불필요한 비용 낭비를 막아드립니다.',
+        'features.f4.title': '지속적 업데이트',
+        'features.f4.desc': '반려동물의 상태 변화에 따라 루틴과 추천 상품이 자동으로 업데이트됩니다. 성장 단계에 맞는 케어를 유지하세요.',
+        'features.f5.title': '전문가 검증 데이터',
+        'features.f5.desc': '국내외 수의사 및 반려동물 전문가가 검증한 정보를 기반으로 합니다. 신뢰할 수 있는 근거 기반 추천입니다.',
+        'features.f6.title': '건강 기록 관리',
+        'features.f6.desc': '반려동물의 건강 히스토리를 자동으로 기록하고 분석합니다. 장기적인 케어를 위한 스마트 리포트를 생성합니다.',
+
+        'curation.eyebrow': 'AI 큐레이션 체험',
+        'curation.title': '지금 바로 고민을 입력해 보세요',
+        'curation.desc': 'AI가 즉시 분석하고 맞춤 해결 루틴과 추천 기준을 제안합니다.',
+        'curation.chip1': '🐶 강아지가 밥을 잘 안 먹어요',
+        'curation.chip2': '🐱 고양이가 자꾸 구토를 해요',
+        'curation.chip3': '🐕 강아지 피부가 가려워요',
+        'curation.chip4': '🐈 고양이가 밤에 울어요',
+        'curation.chip5': '🐾 강아지가 밖에만 나가면 짖어요',
+        'curation.chip6': '🐈 고양이가 화장실을 안 써요',
+        'curation.placeholder': '반려동물의 고민을 자유롭게 입력해 주세요.',
+        'curation.analyze': '분석하기',
+
+        'products.eyebrow': 'AI 추천 상품',
+        'products.title': '고민에 맞는 검증 상품',
+        'products.desc': '문제 원인과 반려동물 상태를 기준으로 필요한 상품만 선별합니다.',
+        'products.p1.type': 'AI 추천 사료',
+        'products.p1.name': '저알러지 프리미엄 사료',
+        'products.p1.desc': '피부 가려움과 식욕 저하가 있는 반려견에게 적합한 단백질 제한형 사료입니다.',
+        'products.p1.price': '₩128,000',
+        'products.p2.type': 'AI 추천 영양제',
+        'products.p2.name': '피부 장벽 오메가 케어',
+        'products.p2.desc': '건조함과 긁는 행동이 잦은 반려동물의 피부 장벽 관리를 돕는 영양제입니다.',
+        'products.p2.price': '₩89,000',
+        'products.p3.type': 'AI 추천 장난감',
+        'products.p3.name': '야간 안정 노즈워크 토이',
+        'products.p3.desc': '밤에 우는 고양이와 분리불안 반려동물의 에너지 소모를 돕는 장난감입니다.',
+        'products.p3.price': '₩18,900',
+        'products.detail': '자세히 보기',
+
+        'reviews.eyebrow': '반려인 후기',
+        'reviews.title': '실제 반려인들의<br />생생한 변화',
+        'reviews.r1.name': '김지현',
+        'reviews.r1.pet': "말티즈 '로로' 보호자",
+        'reviews.r1.text': '강아지가 계속 밥을 줄여서 걱정이었는데, AI가 원인을 딱 짚어주고 루틴까지 알려줬어요. 추천 사료도 잘 맞아서 만족해요!',
+        'reviews.r1.tag': '피부 알러지 해결',
+        'reviews.r2.name': '박민준',
+        'reviews.r2.pet': "스코티시폴드 '나비' 보호자",
+        'reviews.r2.text': '고양이가 밤에 자꾸 울어서 잠을 못 잤는데, 놀이 루틴과 환경을 바꾸니 확실히 나아졌어요.',
+        'reviews.r2.tag': '야간 울음 개선',
+        'reviews.r3.name': '이수아',
+        'reviews.r3.pet': "요크셔테리어 '몽이' 보호자",
+        'reviews.r3.text': '상품만 추천해주는 게 아니라 생활 루틴을 같이 알려줘서 진짜 도움이 됐어요. 수의사 선생님도 잘 관리하고 있다고 하셨어요!',
+        'reviews.r3.tag': '생활 루틴 개선',
+
+        'stats.users': '누적 사용자',
+        'stats.satisfaction': '만족도',
+        'stats.products': '검증 상품',
+        'stats.rating': '평균 평점',
+
+        'cta.title': '우리 아이에게 맞는<br />AI 케어를 시작해 보세요',
+        'cta.desc': '반려동물의 작은 신호도 놓치지 않도록, PawPick AI가 고민 분석부터 해결 루틴까지 함께합니다.',
+        'cta.btn': '무료로 시작하기 →',
+
+        'footer.copy': '© 2026 PawPick AI. All rights reserved.',
+
+        'result.header': 'AI 분석 결과',
+        'result.inputLabel': '입력한 고민',
+        'result.causesLabel': '예상 원인',
+        'result.causes': '- 생활 루틴 변화 가능성\n- 스트레스 또는 활동량 부족 가능성\n- 식습관, 피부, 환경 요인 확인 필요',
+        'result.routinesLabel': '추천 해결 루틴',
+        'result.routines': '1. 최근 환경 변화와 식사 패턴을 기록해 보세요.\n2. 수면, 놀이, 산책 또는 화장실 루틴을 일정하게 유지하세요.\n3. 증상이 반복되면 수의사 상담을 우선하세요.\n4. 필요한 경우에만 사료, 영양제, 장난감 등 보조 상품을 비교하세요.',
+        'result.criteriaLabel': '추천 기준',
+        'result.criteria': '- 과장 광고보다 성분과 실제 리뷰를 확인\n- 반려동물의 나이, 품종, 건강 상태에 맞는지 확인\n- 구매 전 최신 상세페이지와 후기를 함께 확인',
+        'result.empty': '반려동물의 고민이 아직 입력되지 않았습니다.',
+      },
+
+      en: {
+        'nav.features': 'Features',
+        'nav.curation': 'AI Curation',
+        'nav.products': 'Products',
+        'nav.reviews': 'Reviews',
+        'nav.free': 'Free Trial',
+        'nav.start': 'Get Started',
+
+        'hero.badge': 'AI-Powered Pet Care Curation',
+        'hero.h1': 'Let AI Solve<br />Your Pet\'s<br />Problems',
+        'hero.copy': 'PawPick AI analyzes your pet\'s challenges and provides <b>tailored care routines and verified products</b> to help your furry friend thrive.',
+        'hero.cta1': 'Try AI Curation Free →',
+        'hero.cta2': 'Explore Features',
+        'hero.social': '12,000+ pet owners already using it',
+        'hero.bubble1a': 'Cats Welcome Too',
+        'hero.bubble1b': 'All pets supported',
+        'hero.bubble2a': '98% Satisfaction',
+        'hero.bubble2b': 'AI recommendation accuracy',
+        'hero.demo.title': 'AI Analyzing...',
+        'hero.demo.sub': 'Checking breed, lifestyle, and issues',
+        'hero.demo.concern': 'Owner\'s Concern',
+        'hero.demo.concernText': 'My dog won\'t eat at night and keeps scratching 🥺',
+        'hero.demo.check1': 'Skin allergy possibility analyzed',
+        'hero.demo.check2': '3 hypoallergenic foods selected',
+        'hero.demo.check3': '3 tailored supplements selected',
+        'hero.demo.btn': 'View Recommendations →',
+
+        'features.eyebrow': 'WHY PAWPICK',
+        'features.title': 'Beyond Simple Recommendations—<br />AI That Solves Problems',
+        'features.desc': 'PawPick AI analyzes your pet\'s symptoms to identify root causes, then provides actionable solutions you can implement daily.',
+        'features.f1.title': 'AI Problem Analysis',
+        'features.f1.desc': 'AI deeply analyzes symptoms and behaviors entered in plain language, considering age, breed, and living environment for precise diagnosis.',
+        'features.f2.title': 'Personalized Care Routines',
+        'features.f2.desc': 'Not just recommendations—we design specific care routines that fit seamlessly into your daily life with step-by-step guides.',
+        'features.f3.title': 'Curated Verified Products',
+        'features.f3.desc': 'Only products reviewed by veterinarians are recommended. Stop wasting money on products that don\'t work.',
+        'features.f4.title': 'Continuous Updates',
+        'features.f4.desc': 'Care routines and product recommendations automatically update as your pet grows and changes. Stay current at every life stage.',
+        'features.f5.title': 'Expert-Verified Data',
+        'features.f5.desc': 'Based on information verified by domestic and international veterinarians and pet experts. Trust evidence-based recommendations.',
+        'features.f6.title': 'Health Record Management',
+        'features.f6.desc': 'Automatically records and analyzes your pet\'s health history. Generates smart reports for long-term care planning.',
+
+        'curation.eyebrow': 'AI CURATION DEMO',
+        'curation.title': 'Try It Now — Enter Your Concern',
+        'curation.desc': 'AI instantly analyzes and suggests tailored care routines and product criteria.',
+        'curation.chip1': '🐶 My dog won\'t eat',
+        'curation.chip2': '🐱 My cat keeps vomiting',
+        'curation.chip3': '🐕 My dog has itchy skin',
+        'curation.chip4': '🐈 My cat cries at night',
+        'curation.chip5': '🐾 My dog barks when outside',
+        'curation.chip6': '🐈 My cat avoids the litter box',
+        'curation.placeholder': 'Describe your pet\'s concern freely...',
+        'curation.analyze': 'Analyze',
+
+        'products.eyebrow': 'AI RECOMMENDED PRODUCTS',
+        'products.title': 'Verified Products for Your Pet',
+        'products.desc': 'Only the products your pet actually needs, selected based on the root cause and pet condition.',
+        'products.p1.type': 'AI Recommended Food',
+        'products.p1.name': 'Hypoallergenic Premium Food',
+        'products.p1.desc': 'Protein-restricted formula ideal for dogs with skin irritation and appetite loss.',
+        'products.p1.price': '$98',
+        'products.p2.type': 'AI Recommended Supplement',
+        'products.p2.name': 'Skin Barrier Omega Care',
+        'products.p2.desc': 'Supplement that helps manage skin barrier health for pets with dryness and frequent scratching.',
+        'products.p2.price': '$68',
+        'products.p3.type': 'AI Recommended Toy',
+        'products.p3.name': 'Night Calm Nosework Toy',
+        'products.p3.desc': 'Toy designed to help cats that cry at night and pets with separation anxiety burn energy.',
+        'products.p3.price': '$14',
+        'products.detail': 'View Details',
+
+        'reviews.eyebrow': 'PET OWNER REVIEWS',
+        'reviews.title': 'Real Changes from<br />Real Pet Owners',
+        'reviews.r1.name': 'Jihyun K.',
+        'reviews.r1.pet': "Maltese 'Roro' owner",
+        'reviews.r1.text': 'My dog kept eating less and I was so worried, but the AI pinpointed the cause and gave me a routine. The recommended food was a perfect fit!',
+        'reviews.r1.tag': 'Skin Allergy Resolved',
+        'reviews.r2.name': 'Minjun P.',
+        'reviews.r2.pet': "Scottish Fold 'Nabi' owner",
+        'reviews.r2.text': "My cat was crying every night and I couldn't sleep. After changing the play routine and environment, it clearly got better.",
+        'reviews.r2.tag': 'Night Crying Improved',
+        'reviews.r3.name': 'Sua L.',
+        'reviews.r3.pet': "Yorkshire Terrier 'Mongi' owner",
+        'reviews.r3.text': 'It gave me daily routines on top of product recommendations—that\'s what made it truly helpful. My vet was impressed too!',
+        'reviews.r3.tag': 'Lifestyle Routine Improved',
+
+        'stats.users': 'Total Users',
+        'stats.satisfaction': 'Satisfaction Rate',
+        'stats.products': 'Verified Products',
+        'stats.rating': 'Average Rating',
+
+        'cta.title': 'Start AI-Powered Care<br />for Your Pet Today',
+        'cta.desc': 'PawPick AI is with you every step — from analyzing concerns to building care routines for your furry family.',
+        'cta.btn': 'Start for Free →',
+
+        'footer.copy': '© 2026 PawPick AI. All rights reserved.',
+
+        'result.header': 'AI Analysis Result',
+        'result.inputLabel': 'Your concern',
+        'result.causesLabel': 'Possible Causes',
+        'result.causes': '- Possible change in daily routine\n- Possible stress or lack of activity\n- Diet, skin, or environmental factors to check',
+        'result.routinesLabel': 'Recommended Care Routine',
+        'result.routines': '1. Record recent environmental changes and eating patterns.\n2. Keep sleep, play, walk, or litter box routines consistent.\n3. Consult a veterinarian if symptoms persist.\n4. Compare supplementary products (food, supplements, toys) only when necessary.',
+        'result.criteriaLabel': 'Selection Criteria',
+        'result.criteria': '- Check ingredients and real reviews over marketing claims\n- Ensure it suits your pet\'s age, breed, and health\n- Review the latest product page and reviews before purchasing',
+        'result.empty': 'No pet concern has been entered yet.',
+      }
+    };
+
+    /* ── Active language state ── */
+    let currentLang = localStorage.getItem('pawpick-lang') || 'ko';
+
+    function t(key) {
+      return translations[currentLang][key] || translations['ko'][key] || key;
+    }
+
+    function applyTranslations() {
+      document.documentElement.lang = currentLang;
+      document.title = currentLang === 'ko'
+        ? 'PawPick AI | 반려동물 맞춤 큐레이션'
+        : 'PawPick AI | Smart Pet Care Curation';
+
+      /* text content */
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        el.textContent = t(el.dataset.i18n);
       });
-    });
 
+      /* innerHTML (for <br> and <b> tags) */
+      document.querySelectorAll('[data-i18n-html]').forEach(el => {
+        el.innerHTML = t(el.dataset.i18nHtml);
+      });
+
+      /* placeholder */
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        el.placeholder = t(el.dataset.i18nPlaceholder);
+      });
+
+      /* Update input default value to match language */
+      const input = document.getElementById('problemInput');
+      if (currentLang === 'en') {
+        input.value = 'My cat cries every night and I can\'t sleep';
+      } else {
+        input.value = '고양이가 밤에 울다가 하루를 못 자요';
+      }
+
+      /* Clear analysis result on language switch */
+      const result = document.getElementById('analysisResult');
+      result.textContent = '';
+      result.classList.remove('show');
+
+      /* Update toggle button states */
+      document.getElementById('btnKo').classList.toggle('active', currentLang === 'ko');
+      document.getElementById('btnEn').classList.toggle('active', currentLang === 'en');
+    }
+
+    function setLang(lang) {
+      currentLang = lang;
+      localStorage.setItem('pawpick-lang', lang);
+      applyTranslations();
+    }
+
+    /* ── Chip interaction ── */
+    function initChips() {
+      const chips = document.querySelectorAll('.chip');
+      const input = document.getElementById('problemInput');
+
+      chips.forEach((chip) => {
+        chip.addEventListener('click', () => {
+          chips.forEach(c => c.classList.remove('active'));
+          chip.classList.add('active');
+          // Strip emoji from chip text
+          input.value = chip.textContent.replace(/[\u{1F400}-\u{1F9FF}]/gu, '').trim();
+        });
+      });
+    }
+
+    /* ── Analyze ── */
     function analyzeProblem() {
-      const text = problemInput.value.trim() || '반려동물의 고민이 아직 입력되지 않았습니다.';
-      analysisResult.textContent = `AI 분석 결과\n\n입력한 고민: ${text}\n\n예상 원인\n- 생활 루틴 변화 가능성\n- 스트레스 또는 활동량 부족 가능성\n- 식습관, 피부, 환경 요인 확인 필요\n\n추천 해결 루틴\n1. 최근 환경 변화와 식사 패턴을 기록해 보세요.\n2. 수면, 놀이, 산책 또는 화장실 루틴을 일정하게 유지하세요.\n3. 증상이 반복되면 수의사 상담을 우선하세요.\n4. 필요한 경우에만 사료, 영양제, 장난감 등 보조 상품을 비교하세요.\n\n추천 기준\n- 과장 광고보다 성분과 실제 리뷰를 확인\n- 반려동물의 나이, 품종, 건강 상태에 맞는지 확인\n- 구매 전 최신 상세페이지와 후기를 함께 확인`;
-      analysisResult.classList.add('show');
+      const input = document.getElementById('problemInput');
+      const result = document.getElementById('analysisResult');
+      const text = input.value.trim() || t('result.empty');
+
+      result.textContent = [
+        t('result.header'),
+        '',
+        `${t('result.inputLabel')}: ${text}`,
+        '',
+        t('result.causesLabel'),
+        t('result.causes'),
+        '',
+        t('result.routinesLabel'),
+        t('result.routines'),
+        '',
+        t('result.criteriaLabel'),
+        t('result.criteria'),
+      ].join('\n');
+
+      result.classList.add('show');
     }
 
     function scrollToCuration() {
       document.getElementById('curation').scrollIntoView({ behavior: 'smooth' });
     }
+
+    /* ── Init ── */
+    initChips();
+    applyTranslations();
   </script>
 </body>
 </html>
