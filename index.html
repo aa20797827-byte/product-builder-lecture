@@ -1,14 +1,1166 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="ko">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
-  <link href='/style.css' rel='stylesheet'>
+  <title>PawPick AI | 반려동물 맞춤 큐레이션</title>
+  <style>
+    :root {
+      --navy: #08235c;
+      --navy-2: #0b327c;
+      --ink: #0f172a;
+      --text: #334155;
+      --muted: #64748b;
+      --line: #e5eaf3;
+      --bg: #f7f9fd;
+      --card: #ffffff;
+      --blue: #1f5eff;
+      --blue-soft: #edf4ff;
+      --green: #16a34a;
+      --yellow: #fbbf24;
+      --shadow: 0 22px 60px rgba(15, 23, 42, 0.09);
+      --soft-shadow: 0 14px 40px rgba(15, 23, 42, 0.07);
+      --radius: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Pretendard, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 8%, rgba(31, 94, 255, 0.08), transparent 24%),
+        radial-gradient(circle at 86% 12%, rgba(8, 35, 92, 0.08), transparent 28%),
+        linear-gradient(180deg, #ffffff 0%, var(--bg) 42%, #ffffff 100%);
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input {
+      font-family: inherit;
+    }
+
+    .shell {
+      width: min(1200px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.86);
+      border-bottom: 1px solid rgba(226, 232, 240, 0.78);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav-inner {
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      color: var(--navy);
+    }
+
+    .logo {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      color: #fff;
+      background: linear-gradient(145deg, var(--navy), var(--blue));
+      box-shadow: 0 12px 26px rgba(8, 35, 92, 0.18);
+      font-size: 17px;
+      font-weight: 950;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+      color: #475569;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 44px;
+      padding: 0 18px;
+      border: 0;
+      border-radius: 14px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 850;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      color: var(--navy);
+      background: #fff;
+      border: 1px solid #d8e1ee;
+    }
+
+    .btn-primary {
+      color: #fff;
+      background: linear-gradient(145deg, var(--navy), var(--blue));
+      box-shadow: 0 14px 32px rgba(8, 35, 92, 0.22);
+    }
+
+    .hero {
+      position: relative;
+      min-height: 720px;
+      display: grid;
+      grid-template-columns: 1.02fr 0.98fr;
+      align-items: center;
+      gap: 64px;
+      padding: 92px 0 78px;
+    }
+
+    .badge {
+      width: fit-content;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      color: var(--navy);
+      background: var(--blue-soft);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .badge span {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--blue);
+      box-shadow: 0 0 0 6px rgba(31, 94, 255, 0.12);
+    }
+
+    h1 {
+      margin: 24px 0 22px;
+      font-size: clamp(44px, 6vw, 74px);
+      line-height: 1.03;
+      letter-spacing: -0.085em;
+      color: #0d1b34;
+    }
+
+    .hero-copy {
+      max-width: 620px;
+      margin: 0 0 30px;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.75;
+      letter-spacing: -0.02em;
+      font-weight: 520;
+    }
+
+    .hero-copy b {
+      color: var(--navy);
+      font-weight: 900;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .social-proof {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    .avatar-row {
+      display: flex;
+      align-items: center;
+    }
+
+    .avatar {
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      margin-left: -8px;
+      border: 2px solid #fff;
+      border-radius: 999px;
+      background: #eef4ff;
+      box-shadow: 0 8px 16px rgba(15, 23, 42, 0.08);
+      font-size: 13px;
+    }
+
+    .avatar:first-child {
+      margin-left: 0;
+    }
+
+    .rating {
+      color: #f59e0b;
+      font-weight: 950;
+    }
+
+    .demo-wrap {
+      position: relative;
+      min-height: 440px;
+    }
+
+    .demo-card {
+      position: relative;
+      z-index: 4;
+      width: min(100%, 520px);
+      margin-left: auto;
+      padding: 26px;
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      animation: floatCard 6s ease-in-out infinite;
+    }
+
+    .demo-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--ink);
+      font-weight: 900;
+    }
+
+    .status-icon {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: #fff1f2;
+      font-size: 17px;
+    }
+
+    .status small {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    .online {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.1);
+    }
+
+    .question-box {
+      padding: 16px;
+      border-radius: 18px;
+      background: #f5f7fb;
+      color: #334155;
+      font-size: 14px;
+      line-height: 1.55;
+      font-weight: 700;
+    }
+
+    .check-list {
+      display: grid;
+      gap: 10px;
+      margin: 18px 0;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #334155;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .check-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 5px rgba(34, 197, 94, 0.09);
+      flex: 0 0 auto;
+    }
+
+    .demo-card .btn {
+      width: 100%;
+    }
+
+    .floating-bubble {
+      position: absolute;
+      z-index: 5;
+      padding: 13px 16px;
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.94);
+      box-shadow: var(--soft-shadow);
+      font-size: 12px;
+      font-weight: 900;
+      color: var(--navy);
+      animation: bubbleFloat 5.5s ease-in-out infinite;
+    }
+
+    .bubble-1 {
+      right: -8px;
+      top: -20px;
+    }
+
+    .bubble-2 {
+      left: 8px;
+      bottom: 44px;
+      animation-delay: -1.8s;
+    }
+
+    .blob {
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(2px);
+      opacity: 0.65;
+    }
+
+    .blob-a {
+      width: 190px;
+      height: 190px;
+      right: 20px;
+      top: 20px;
+      background: rgba(31, 94, 255, 0.12);
+    }
+
+    .blob-b {
+      width: 120px;
+      height: 120px;
+      left: 40px;
+      bottom: 70px;
+      background: rgba(8, 35, 92, 0.1);
+    }
+
+    .section {
+      padding: 92px 0;
+    }
+
+    .section-head {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 54px;
+    }
+
+    .section-eyebrow {
+      margin-bottom: 10px;
+      color: var(--navy);
+      font-size: 12px;
+      font-weight: 950;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      margin: 0;
+      color: #0d1b34;
+      font-size: clamp(32px, 4vw, 48px);
+      line-height: 1.12;
+      letter-spacing: -0.06em;
+    }
+
+    .section-desc {
+      margin: 16px auto 0;
+      max-width: 620px;
+      color: var(--muted);
+      line-height: 1.72;
+      font-weight: 520;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .feature-card {
+      min-height: 220px;
+      padding: 26px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: #fff;
+      box-shadow: 0 12px 34px rgba(15, 23, 42, 0.045);
+      transition: transform 0.24s ease, box-shadow 0.24s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--soft-shadow);
+    }
+
+    .feature-icon {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 22px;
+      border-radius: 14px;
+      font-size: 20px;
+    }
+
+    .icon-blue { background: #edf4ff; }
+    .icon-green { background: #ecfdf3; }
+    .icon-purple { background: #f5f0ff; }
+    .icon-orange { background: #fff7ed; }
+    .icon-red { background: #fff1f2; }
+    .icon-pink { background: #fdf2f8; }
+
+    .feature-card h3 {
+      margin: 0 0 10px;
+      font-size: 18px;
+      letter-spacing: -0.04em;
+    }
+
+    .feature-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.68;
+      font-size: 14px;
+      font-weight: 520;
+    }
+
+    .curation {
+      padding: 96px 0;
+      background: #f5f7fb;
+      border-top: 1px solid #e8eef8;
+      border-bottom: 1px solid #e8eef8;
+    }
+
+    .query-wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .chips {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 24px 0 18px;
+    }
+
+    .chip {
+      padding: 9px 13px;
+      border: 1px solid #dbe5f2;
+      border-radius: 999px;
+      background: #fff;
+      color: #475569;
+      font-size: 13px;
+      font-weight: 750;
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .chip:hover,
+    .chip.active {
+      color: #fff;
+      border-color: var(--navy);
+      background: var(--navy);
+    }
+
+    .search-box {
+      display: flex;
+      gap: 10px;
+      padding: 10px;
+      border: 1px solid #dfe7f3;
+      border-radius: 18px;
+      background: #fff;
+      box-shadow: var(--soft-shadow);
+    }
+
+    .search-box input {
+      flex: 1;
+      min-height: 48px;
+      border: 0;
+      outline: 0;
+      padding: 0 12px;
+      color: var(--ink);
+      font-size: 15px;
+      font-weight: 650;
+    }
+
+    .result-preview {
+      display: none;
+      margin-top: 20px;
+      padding: 20px;
+      border: 1px solid #dfe7f3;
+      border-radius: 18px;
+      background: #fff;
+      box-shadow: var(--soft-shadow);
+      text-align: left;
+      color: #334155;
+      line-height: 1.65;
+      font-size: 14px;
+      font-weight: 650;
+      white-space: pre-wrap;
+    }
+
+    .result-preview.show {
+      display: block;
+    }
+
+    .products-grid,
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .product-card,
+    .review-card,
+    .stat-card {
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: #fff;
+      box-shadow: 0 12px 34px rgba(15, 23, 42, 0.045);
+    }
+
+    .product-card {
+      overflow: hidden;
+    }
+
+    .product-image {
+      height: 170px;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(31, 94, 255, 0.12), transparent 36%),
+        #f5f7fb;
+      font-size: 64px;
+    }
+
+    .product-body {
+      padding: 20px;
+    }
+
+    .product-type {
+      width: fit-content;
+      margin-bottom: 12px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      color: var(--navy);
+      background: var(--blue-soft);
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .product-body h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+      letter-spacing: -0.04em;
+    }
+
+    .product-body p {
+      margin: 0 0 14px;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .price-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      font-weight: 900;
+      color: #0d1b34;
+    }
+
+    .mini-link {
+      padding: 8px 12px;
+      border-radius: 10px;
+      color: #fff;
+      background: var(--navy);
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .review-card {
+      padding: 22px;
+    }
+
+    .review-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .review-user {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      font-weight: 900;
+    }
+
+    .user-icon {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 999px;
+      background: #eef4ff;
+    }
+
+    .review-user small {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    .stars {
+      color: var(--yellow);
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .review-card p {
+      margin: 0 0 14px;
+      color: #475569;
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    .tag {
+      width: fit-content;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: #f1f5f9;
+      color: var(--navy);
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 44px;
+    }
+
+    .stat-card {
+      padding: 24px;
+      text-align: center;
+    }
+
+    .stat-card strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--navy);
+      font-size: 34px;
+      letter-spacing: -0.06em;
+    }
+
+    .stat-card span {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 750;
+    }
+
+    .cta {
+      padding: 96px 0;
+    }
+
+    .cta-box {
+      position: relative;
+      overflow: hidden;
+      padding: 62px;
+      border-radius: 32px;
+      color: #fff;
+      background:
+        radial-gradient(circle at 14% 20%, rgba(31, 94, 255, 0.34), transparent 36%),
+        linear-gradient(145deg, var(--navy), #06163e);
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .cta-box::after {
+      content: "🐾";
+      position: absolute;
+      right: 52px;
+      bottom: -26px;
+      opacity: 0.09;
+      font-size: 170px;
+      transform: rotate(-12deg);
+    }
+
+    .cta-box h2 {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+      font-size: clamp(34px, 4vw, 56px);
+      line-height: 1.14;
+      letter-spacing: -0.07em;
+    }
+
+    .cta-box p {
+      position: relative;
+      z-index: 1;
+      max-width: 620px;
+      margin: 18px auto 28px;
+      color: rgba(255, 255, 255, 0.74);
+      line-height: 1.72;
+    }
+
+    .cta-box .btn {
+      position: relative;
+      z-index: 1;
+      color: var(--navy);
+      background: #fff;
+      box-shadow: none;
+    }
+
+    footer {
+      border-top: 1px solid #e8eef8;
+      background: #fff;
+    }
+
+    .footer-inner {
+      min-height: 90px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    @keyframes floatCard {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    @keyframes bubbleFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @media (max-width: 980px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        min-height: auto;
+      }
+
+      .demo-card {
+        margin: 0 auto;
+      }
+
+      .feature-grid,
+      .products-grid,
+      .reviews-grid,
+      .stats {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .shell {
+        width: min(100% - 28px, 1200px);
+      }
+
+      .nav-inner {
+        height: 70px;
+      }
+
+      .brand {
+        font-size: 18px;
+      }
+
+      .logo {
+        width: 34px;
+        height: 34px;
+        border-radius: 12px;
+      }
+
+      .nav-actions .btn-outline {
+        display: none;
+      }
+
+      h1 {
+        font-size: 44px;
+      }
+
+      .hero {
+        padding-top: 58px;
+      }
+
+      .hero-copy {
+        font-size: 16px;
+      }
+
+      .demo-card {
+        padding: 20px;
+      }
+
+      .floating-bubble {
+        display: none;
+      }
+
+      .feature-grid,
+      .products-grid,
+      .reviews-grid,
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .search-box {
+        flex-direction: column;
+      }
+
+      .search-box .btn {
+        width: 100%;
+      }
+
+      .section,
+      .curation,
+      .cta {
+        padding: 70px 0;
+      }
+
+      .cta-box {
+        padding: 38px 24px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <button onclick="console.log('hello');">Press me</button>
-  <script defer type="text/javascript" src="/main.js"></script>
+  <header class="navbar">
+    <div class="shell nav-inner">
+      <a class="brand" href="#top">
+        <span class="logo">P</span>
+        <span>PawPick</span>
+      </a>
+
+      <nav class="nav-links" aria-label="메인 메뉴">
+        <a href="#features">기능 소개</a>
+        <a href="#curation">AI 큐레이션</a>
+        <a href="#products">추천 상품</a>
+        <a href="#reviews">후기</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a class="btn btn-outline" href="#curation">무료 체험</a>
+        <a class="btn btn-primary" href="#curation">시작하기</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="shell hero">
+      <div>
+        <div class="badge"><span></span>AI 기반 반려동물 맞춤 큐레이션</div>
+        <h1>내 반려동물의<br />고민을 AI가<br />해결해 드려요</h1>
+        <p class="hero-copy">
+          PawPick AI는 반려인의 생활 고민을 분석하고, 상황에 맞는 <b>해결 루틴과 검증된 상품</b>을 맞춤 추천해 드립니다.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#curation">AI 큐레이션 무료 체험 →</a>
+          <a class="btn btn-outline" href="#features">기능 살펴보기</a>
+        </div>
+        <div class="social-proof">
+          <div class="avatar-row" aria-hidden="true">
+            <span class="avatar">🐱</span>
+            <span class="avatar">🐶</span>
+            <span class="avatar">🐾</span>
+            <span class="avatar">❤️</span>
+          </div>
+          <div><span class="rating">★★★★★ 4.9</span> · 12,000+ 반려인이 이미 사용 중</div>
+        </div>
+      </div>
+
+      <div class="demo-wrap">
+        <div class="blob blob-a"></div>
+        <div class="blob blob-b"></div>
+        <div class="floating-bubble bubble-1">🐶 고양이도 OK<br /><span style="color:#94a3b8;font-weight:700;">모든 반려동물 지원</span></div>
+        <div class="floating-bubble bubble-2">98% 만족도<br /><span style="color:#94a3b8;font-weight:700;">AI 추천 정확도</span></div>
+
+        <article class="demo-card">
+          <div class="demo-header">
+            <div class="status">
+              <span class="status-icon">🐕</span>
+              <div>
+                AI 분석 중...
+                <small>품종, 생활습관, 문제 상황 확인</small>
+              </div>
+            </div>
+            <span class="online"></span>
+          </div>
+
+          <div class="question-box">
+            반려인의 고민<br />
+            "강아지가 밤에 잘 안 먹고 자꾸 긁어요 🥺"
+          </div>
+
+          <div class="check-list">
+            <div class="check-item"><span class="check-dot"></span>피부 알레르기 가능성 분석 완료</div>
+            <div class="check-item"><span class="check-dot"></span>저알러지 사료 3가지 선별</div>
+            <div class="check-item"><span class="check-dot"></span>맞춤 영양제 3가지 선별</div>
+          </div>
+
+          <button class="btn btn-primary" type="button" onclick="scrollToCuration()">추천된 보기 →</button>
+        </article>
+      </div>
+    </section>
+
+    <section class="shell section" id="features">
+      <div class="section-head">
+        <div class="section-eyebrow">WHY PAWPICK</div>
+        <h2 class="section-title">단순 추천을 넘어<br />문제를 해결하는 AI</h2>
+        <p class="section-desc">PawPick AI는 반려동물의 증상을 분석해 원인을 파악하고, 생활 속 실천 가능한 해결책까지 제시합니다.</p>
+      </div>
+
+      <div class="feature-grid">
+        <article class="feature-card">
+          <div class="feature-icon icon-blue">🔬</div>
+          <h3>AI 고민 분석</h3>
+          <p>자연어로 입력한 반려동물의 증상과 행동을 AI가 심층 분석합니다. 나이, 품종, 생활환경까지 고려한 정밀 진단을 제공합니다.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon icon-green">🎯</div>
+          <h3>맞춤 해결 루틴</h3>
+          <p>단순 추천이 아닌, 하루 일과에 녹아드는 구체적인 해결 루틴을 설계해 드립니다. 단계별 가이드로 바로 실천 가능합니다.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon icon-purple">🛍️</div>
+          <h3>검증된 상품 선별</h3>
+          <p>수의사 검토를 거친 상품 데이터베이스에서 상황에 맞는 제품만 선별합니다. 불필요한 비용 낭비를 막아드립니다.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon icon-orange">🔄</div>
+          <h3>지속적 업데이트</h3>
+          <p>반려동물의 상태 변화에 따라 루틴과 추천 상품이 자동으로 업데이트됩니다. 성장 단계에 맞는 케어를 유지하세요.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon icon-red">🛡️</div>
+          <h3>전문가 검증 데이터</h3>
+          <p>국내외 수의사 및 반려동물 전문가가 검증한 정보를 기반으로 합니다. 신뢰할 수 있는 근거 기반 추천입니다.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon icon-pink">💗</div>
+          <h3>건강 기록 관리</h3>
+          <p>반려동물의 건강 히스토리를 자동으로 기록하고 분석합니다. 장기적인 케어를 위한 스마트 리포트를 생성합니다.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="curation" id="curation">
+      <div class="shell query-wrap">
+        <div class="section-eyebrow">AI 큐레이션 체험</div>
+        <h2 class="section-title">지금 바로 고민을 입력해 보세요</h2>
+        <p class="section-desc">AI가 즉시 분석하고 맞춤 해결 루틴과 추천 기준을 제안합니다.</p>
+
+        <div class="chips">
+          <button class="chip" type="button">🐶 강아지가 밥을 잘 안 먹어요</button>
+          <button class="chip" type="button">🐱 고양이가 자꾸 구토를 해요</button>
+          <button class="chip" type="button">🐕 강아지 피부가 가려워요</button>
+          <button class="chip active" type="button">🐈 고양이가 밤에 울어요</button>
+          <button class="chip" type="button">🐾 강아지가 밖에만 나가면 짖어요</button>
+          <button class="chip" type="button">🐈 고양이가 화장실을 안 써요</button>
+        </div>
+
+        <div class="search-box">
+          <input id="problemInput" type="text" value="고양이가 밤에 울다가 하루를 못 자요" placeholder="반려동물의 고민을 자유롭게 입력해 주세요." />
+          <button class="btn btn-primary" type="button" onclick="analyzeProblem()">분석하기</button>
+        </div>
+
+        <div id="analysisResult" class="result-preview"></div>
+      </div>
+    </section>
+
+    <section class="shell section" id="products">
+      <div class="section-head">
+        <div class="section-eyebrow">AI 추천 상품</div>
+        <h2 class="section-title">고민에 맞는 검증 상품</h2>
+        <p class="section-desc">문제 원인과 반려동물 상태를 기준으로 필요한 상품만 선별합니다.</p>
+      </div>
+
+      <div class="products-grid">
+        <article class="product-card">
+          <div class="product-image">🥣</div>
+          <div class="product-body">
+            <div class="product-type">AI 추천 사료</div>
+            <h3>저알러지 프리미엄 사료</h3>
+            <p>피부 가려움과 식욕 저하가 있는 반려견에게 적합한 단백질 제한형 사료입니다.</p>
+            <div class="price-row"><span>₩128,000</span><a class="mini-link" href="#curation">자세히 보기</a></div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-image">💊</div>
+          <div class="product-body">
+            <div class="product-type">AI 추천 영양제</div>
+            <h3>피부 장벽 오메가 케어</h3>
+            <p>건조함과 긁는 행동이 잦은 반려동물의 피부 장벽 관리를 돕는 영양제입니다.</p>
+            <div class="price-row"><span>₩89,000</span><a class="mini-link" href="#curation">자세히 보기</a></div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-image">🧸</div>
+          <div class="product-body">
+            <div class="product-type">AI 추천 장난감</div>
+            <h3>야간 안정 노즈워크 토이</h3>
+            <p>밤에 우는 고양이와 분리불안 반려동물의 에너지 소모를 돕는 장난감입니다.</p>
+            <div class="price-row"><span>₩18,900</span><a class="mini-link" href="#curation">자세히 보기</a></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="shell section" id="reviews">
+      <div class="section-head">
+        <div class="section-eyebrow">반려인 후기</div>
+        <h2 class="section-title">실제 반려인들의<br />생생한 변화</h2>
+      </div>
+
+      <div class="reviews-grid">
+        <article class="review-card">
+          <div class="review-top">
+            <div class="review-user"><span class="user-icon">👩</span><div>김지현<small>말티즈 '로로' 보호자</small></div></div>
+            <span class="stars">★★★★★</span>
+          </div>
+          <p>강아지가 계속 밥을 줄여서 걱정이었는데, AI가 원인을 딱 짚어주고 루틴까지 알려줬어요. 추천 사료도 잘 맞아서 만족해요!</p>
+          <span class="tag">피부 알러지 해결</span>
+        </article>
+
+        <article class="review-card">
+          <div class="review-top">
+            <div class="review-user"><span class="user-icon">👨</span><div>박민준<small>스코티시폴드 '나비' 보호자</small></div></div>
+            <span class="stars">★★★★★</span>
+          </div>
+          <p>고양이가 밤에 자꾸 울어서 잠을 못 잤는데, 놀이 루틴과 환경을 바꾸니 확실히 나아졌어요.</p>
+          <span class="tag">야간 울음 개선</span>
+        </article>
+
+        <article class="review-card">
+          <div class="review-top">
+            <div class="review-user"><span class="user-icon">👩</span><div>이수아<small>요크셔테리어 '몽이' 보호자</small></div></div>
+            <span class="stars">★★★★★</span>
+          </div>
+          <p>상품만 추천해주는 게 아니라 생활 루틴을 같이 알려줘서 진짜 도움이 됐어요. 수의사 선생님도 잘 관리하고 있다고 하셨어요!</p>
+          <span class="tag">생활 루틴 개선</span>
+        </article>
+      </div>
+
+      <div class="stats">
+        <div class="stat-card"><strong>12,000+</strong><span>누적 사용자</span></div>
+        <div class="stat-card"><strong>98%</strong><span>만족도</span></div>
+        <div class="stat-card"><strong>750+</strong><span>검증 상품</span></div>
+        <div class="stat-card"><strong>4.9★</strong><span>평균 평점</span></div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="shell">
+        <div class="cta-box">
+          <h2>우리 아이에게 맞는<br />AI 케어를 시작해 보세요</h2>
+          <p>반려동물의 작은 신호도 놓치지 않도록, PawPick AI가 고민 분석부터 해결 루틴까지 함께합니다.</p>
+          <a class="btn" href="#curation">무료로 시작하기 →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-inner">
+      <div>© 2026 PawPick AI. All rights reserved.</div>
+      <div>Problem-first · AI Curation · Pet Care</div>
+    </div>
+  </footer>
+
+  <script>
+    const chips = document.querySelectorAll('.chip');
+    const problemInput = document.getElementById('problemInput');
+    const analysisResult = document.getElementById('analysisResult');
+
+    chips.forEach((chip) => {
+      chip.addEventListener('click', () => {
+        chips.forEach((item) => item.classList.remove('active'));
+        chip.classList.add('active');
+        problemInput.value = chip.textContent.replace(/[🐶🐱🐕🐈🐾]/g, '').trim();
+      });
+    });
+
+    function analyzeProblem() {
+      const text = problemInput.value.trim() || '반려동물의 고민이 아직 입력되지 않았습니다.';
+      analysisResult.textContent = `AI 분석 결과\n\n입력한 고민: ${text}\n\n예상 원인\n- 생활 루틴 변화 가능성\n- 스트레스 또는 활동량 부족 가능성\n- 식습관, 피부, 환경 요인 확인 필요\n\n추천 해결 루틴\n1. 최근 환경 변화와 식사 패턴을 기록해 보세요.\n2. 수면, 놀이, 산책 또는 화장실 루틴을 일정하게 유지하세요.\n3. 증상이 반복되면 수의사 상담을 우선하세요.\n4. 필요한 경우에만 사료, 영양제, 장난감 등 보조 상품을 비교하세요.\n\n추천 기준\n- 과장 광고보다 성분과 실제 리뷰를 확인\n- 반려동물의 나이, 품종, 건강 상태에 맞는지 확인\n- 구매 전 최신 상세페이지와 후기를 함께 확인`;
+      analysisResult.classList.add('show');
+    }
+
+    function scrollToCuration() {
+      document.getElementById('curation').scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
 </body>
 </html>
