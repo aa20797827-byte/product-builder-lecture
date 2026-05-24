@@ -190,12 +190,14 @@
       color: var(--navy);
       background: var(--blue-soft);
       font-size: 13px;
-      font-weight: 900;
+      font-weight: 700;
+      margin-bottom: 8px;
     }
 
-    .badge span {
+    .badge .dot {
       width: 8px;
       height: 8px;
+      flex-shrink: 0;
       border-radius: 50%;
       background: var(--blue);
       box-shadow: 0 0 0 6px rgba(31, 94, 255, 0.12);
@@ -801,7 +803,7 @@
     <!-- ══ HERO ══ -->
     <section class="shell hero">
       <div>
-        <div class="badge"><span></span><span data-i18n="hero.badge">AI 기반 반려동물 맞춤 큐레이션</span></div>
+        <div class="badge"><span class="dot"></span><span data-i18n="hero.badge">AI 기반 반려동물 맞춤 큐레이션</span></div>
         <h1 data-i18n-html="hero.h1">내 반려동물의<br />고민을 AI가<br />해결해 드려요</h1>
         <p class="hero-copy" data-i18n-html="hero.copy">
           PawPick AI는 반려인의 생활 고민을 분석하고, 상황에 맞는 <b>해결 루틴과 검증된 상품</b>을 맞춤 추천해 드립니다.
