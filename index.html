@@ -903,6 +903,36 @@
       font-weight: 700;
     }
 
+    /* ── AI Loading ── */
+    .ai-loading {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--navy);
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .ai-loading::before {
+      content: '';
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      border: 3px solid rgba(31, 94, 255, 0.2);
+      border-top-color: var(--blue);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .ai-error {
+      color: #9f1239;
+      font-weight: 700;
+    }
+
     /* ── Animations ── */
     @keyframes floatCard {
       0%, 100% { transform: translateY(0); }
@@ -1713,28 +1743,42 @@
       });
     }
 
-    /* ── Analyze ── */
-    function analyzeProblem() {
+    /* ── Analyze (Real AI) ── */
+    async function analyzeProblem() {
       const input = document.getElementById('problemInput');
       const result = document.getElementById('analysisResult');
-      const text = input.value.trim() || t('result.empty');
+      const btn = document.querySelector('[onclick="analyzeProblem()"]');
+      const text = input.value.trim();
 
-      result.textContent = [
-        t('result.header'),
-        '',
-        `${t('result.inputLabel')}: ${text}`,
-        '',
-        t('result.causesLabel'),
-        t('result.causes'),
-        '',
-        t('result.routinesLabel'),
-        t('result.routines'),
-        '',
-        t('result.criteriaLabel'),
-        t('result.criteria'),
-      ].join('\n');
+      if (!text) {
+        result.textContent = t('result.empty');
+        result.classList.add('show');
+        return;
+      }
 
+      // 로딩 상태
+      result.innerHTML = `<span class="ai-loading">${currentLang === 'ko' ? '🐾 AI가 분석 중이에요...' : '🐾 AI is analyzing...'}</span>`;
       result.classList.add('show');
+      if (btn) { btn.disabled = true; }
+
+      try {
+        const res = await fetch('/api/analyze', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ text, lang: currentLang })
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) throw new Error(data.error || 'AI 오류가 발생했습니다.');
+
+        result.textContent = data.result;
+
+      } catch (err) {
+        result.innerHTML = `<span class="ai-error">⚠️ ${err.message || '오류가 발생했습니다. 잠시 후 다시 시도해 주세요.'}</span>`;
+      } finally {
+        if (btn) { btn.disabled = false; }
+      }
     }
 
     function scrollToCuration() {
