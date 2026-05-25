@@ -81,7 +81,16 @@ Keep your response warm, practical, and concise (under 250 words).`
     if (!response.ok) {
       const errText = await response.text();
       console.error('Gemini API error:', response.status, errText);
-      throw new Error(`Gemini 오류: ${response.status}`);
+      if (response.status === 429) {
+        throw new Error('AI 요청이 너무 많습니다. 잠시 후 다시 시도해 주세요. (Quota exceeded)');
+      }
+      if (response.status === 400) {
+        throw new Error('요청 형식이 올바르지 않습니다. (Bad Request)');
+      }
+      if (response.status === 403) {
+        throw new Error('API 키가 유효하지 않거나 권한이 없습니다. Vercel 환경변수를 확인해 주세요.');
+      }
+      throw new Error(`AI 서비스 오류가 발생했습니다. (${response.status})`);
     }
 
     const data = await response.json();
