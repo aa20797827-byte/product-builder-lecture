@@ -603,16 +603,19 @@
     }
     .rec-price { font-size: 14px; font-weight: 900; color: var(--ink); }
     .rec-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
       padding: 7px 12px;
       border-radius: 9px;
-      background: var(--navy);
+      background: #03c75a;   /* 네이버 그린 */
       color: #fff;
       font-size: 12px;
       font-weight: 850;
       white-space: nowrap;
-      transition: background 0.15s;
+      transition: background 0.15s, transform 0.15s;
     }
-    .rec-btn:hover { background: var(--blue); }
+    .rec-btn:hover { background: #02a84a; transform: translateY(-1px); }
 
     /* ── Products / Reviews ── */
     .products-grid, .reviews-grid {
@@ -1830,40 +1833,45 @@
     /* ════════════════════════════════════
        상품 데이터베이스
     ════════════════════════════════════ */
+    // 네이버쇼핑 검색 URL 생성 헬퍼
+    const NS = q => `https://search.shopping.naver.com/search/all?query=${encodeURIComponent(q)}`;
+    // 아마존 검색 URL 생성 헬퍼
+    const AMZ = q => `https://www.amazon.com/s?k=${encodeURIComponent(q)}&i=pet-supplies`;
+
     const PRODUCTS = {
       ko: [
-        { emoji:'🥣', type:'사료',       name:'저알러지 프리미엄 사료',     desc:'피부 가려움·식욕 저하 반려견을 위한 단백질 제한형 사료',             price:'₩128,000', tags:['사료','피부','오메가3','알러지'] },
-        { emoji:'🍖', type:'습식사료',    name:'소화 배려 습식사료',          desc:'소화기가 약하거나 밥을 잘 안 먹는 반려동물용 고수분 사료',           price:'₩48,000',  tags:['습식사료','사료','소화영양제','식욕'] },
-        { emoji:'🦴', type:'간식',        name:'저칼로리 트레이닝 간식',      desc:'훈련·보상용으로 적합한 소프트 타입 저칼로리 간식',                   price:'₩18,000',  tags:['간식','하네스'] },
-        { emoji:'💊', type:'피부영양제',  name:'피부 장벽 오메가 케어',       desc:'건조함·긁는 행동이 잦은 반려동물의 피부 장벽 관리 영양제',           price:'₩89,000',  tags:['피부영양제','오메가3','피부','샴푸','알러지'] },
-        { emoji:'🦵', type:'관절영양제',  name:'관절 케어 MSM 영양제',        desc:'활동량이 많거나 노령 반려동물의 관절 건강 지원',                     price:'₩62,000',  tags:['관절영양제'] },
-        { emoji:'🌿', type:'소화영양제',  name:'유산균 소화 케어',            desc:'장 건강과 소화 개선을 위한 반려동물 전용 유산균',                    price:'₩44,000',  tags:['소화영양제','유산균','습식사료'] },
-        { emoji:'😌', type:'진정영양제',  name:'분리불안 진정 영양제',        desc:'외출 시 불안·짖음·야간 울음을 완화하는 천연 성분 제품',              price:'₩38,000',  tags:['진정영양제','켄넬','노즈워크'] },
-        { emoji:'🧸', type:'노즈워크',    name:'야간 안정 노즈워크 토이',     desc:'밤에 우는 고양이·분리불안 반려동물의 에너지 소모 장난감',            price:'₩18,900',  tags:['노즈워크','장난감','진정영양제'] },
-        { emoji:'🐟', type:'스크래쳐',    name:'고양이 스크래칭 보드',        desc:'스트레스 해소와 발톱 관리를 위한 고내구성 스크래쳐',                 price:'₩24,000',  tags:['스크래쳐','캣타워'] },
-        { emoji:'🏠', type:'캣타워',      name:'멀티 캣타워 5단',             desc:'활동량이 부족한 고양이의 운동·수면·영역감각 충족',                   price:'₩89,000',  tags:['캣타워','스크래쳐','노즈워크'] },
-        { emoji:'🚿', type:'샴푸',        name:'저자극 피부 진정 샴푸',       desc:'민감한 피부·알러지가 있는 반려동물용 약산성 샴푸',                   price:'₩34,000',  tags:['샴푸','피부영양제'] },
-        { emoji:'🦷', type:'덴탈케어',    name:'효소 치약 + 핑거브러쉬 세트', desc:'구강 냄새와 치석 예방을 위한 반려동물 전용 덴탈케어',               price:'₩28,000',  tags:['치아'] },
-        { emoji:'🪣', type:'고양이모래',  name:'두부 항균 고양이 모래',       desc:'화장실 기피를 줄이는 무향·저분진 두부 모래',                         price:'₩32,000',  tags:['모래'] },
-        { emoji:'🎽', type:'하네스',      name:'산책 안정 H자형 하네스',      desc:'외출 시 당기는 행동과 기관지 부담을 줄이는 하네스',                  price:'₩42,000',  tags:['하네스','간식'] },
-        { emoji:'🛏️', type:'켄넬',        name:'분리불안 안심 철제 켄넬',     desc:'독립 공간 형성으로 분리불안 훈련에 도움을 주는 켄넬',                price:'₩68,000',  tags:['켄넬','진정영양제'] },
+        { emoji:'🥣', type:'사료',       name:'저알러지 프리미엄 사료',      desc:'피부 가려움·식욕 저하 반려견을 위한 단백질 제한형 사료',            price:'최저가 검색', tags:['사료','피부','오메가3','알러지'],   url: NS('강아지 저알러지 사료 단백질제한') },
+        { emoji:'🍖', type:'습식사료',   name:'소화 배려 습식사료',           desc:'소화기가 약하거나 밥을 잘 안 먹는 반려동물용 고수분 사료',          price:'최저가 검색', tags:['습식사료','사료','소화영양제','식욕'], url: NS('강아지 소화 습식사료') },
+        { emoji:'🦴', type:'간식',       name:'저칼로리 트레이닝 간식',       desc:'훈련·보상용으로 적합한 소프트 타입 저칼로리 간식',                  price:'최저가 검색', tags:['간식','하네스'],                     url: NS('강아지 저칼로리 간식 훈련용') },
+        { emoji:'💊', type:'피부영양제', name:'피부 장벽 오메가 케어',        desc:'건조함·긁는 행동이 잦은 반려동물의 피부 장벽 관리 영양제',          price:'최저가 검색', tags:['피부영양제','오메가3','피부','샴푸','알러지'], url: NS('강아지 피부 영양제 오메가3') },
+        { emoji:'🦵', type:'관절영양제', name:'관절 케어 MSM 영양제',         desc:'활동량이 많거나 노령 반려동물의 관절 건강 지원',                    price:'최저가 검색', tags:['관절영양제'],                        url: NS('강아지 관절 영양제 MSM') },
+        { emoji:'🌿', type:'소화영양제', name:'유산균 소화 케어',             desc:'장 건강과 소화 개선을 위한 반려동물 전용 유산균',                   price:'최저가 검색', tags:['소화영양제','유산균','습식사료'],     url: NS('강아지 유산균 영양제') },
+        { emoji:'😌', type:'진정영양제', name:'분리불안 진정 영양제',         desc:'외출 시 불안·짖음·야간 울음을 완화하는 천연 성분 제품',             price:'최저가 검색', tags:['진정영양제','켄넬','노즈워크'],       url: NS('반려동물 분리불안 영양제 진정') },
+        { emoji:'🧸', type:'노즈워크',   name:'야간 안정 노즈워크 토이',      desc:'밤에 우는 고양이·분리불안 반려동물의 에너지 소모 장난감',           price:'최저가 검색', tags:['노즈워크','장난감','진정영양제'],     url: NS('강아지 노즈워크 장난감') },
+        { emoji:'🐟', type:'스크래쳐',   name:'고양이 스크래칭 보드',         desc:'스트레스 해소와 발톱 관리를 위한 고내구성 스크래쳐',                price:'최저가 검색', tags:['스크래쳐','캣타워'],                  url: NS('고양이 스크래쳐') },
+        { emoji:'🏠', type:'캣타워',     name:'멀티 캣타워 5단',              desc:'활동량이 부족한 고양이의 운동·수면·영역감각 충족',                  price:'최저가 검색', tags:['캣타워','스크래쳐','노즈워크'],       url: NS('고양이 캣타워') },
+        { emoji:'🚿', type:'샴푸',       name:'저자극 피부 진정 샴푸',        desc:'민감한 피부·알러지가 있는 반려동물용 약산성 샴푸',                  price:'최저가 검색', tags:['샴푸','피부영양제'],                  url: NS('강아지 샴푸 저자극 피부') },
+        { emoji:'🦷', type:'덴탈케어',   name:'효소 치약 + 핑거브러쉬 세트',  desc:'구강 냄새와 치석 예방을 위한 반려동물 전용 덴탈케어',              price:'최저가 검색', tags:['치아'],                              url: NS('반려동물 치약 덴탈케어') },
+        { emoji:'🪣', type:'고양이모래', name:'두부 항균 고양이 모래',         desc:'화장실 기피를 줄이는 무향·저분진 두부 모래',                        price:'최저가 검색', tags:['모래'],                              url: NS('고양이 두부모래') },
+        { emoji:'🎽', type:'하네스',     name:'산책 안정 H자형 하네스',        desc:'외출 시 당기는 행동과 기관지 부담을 줄이는 하네스',                 price:'최저가 검색', tags:['하네스','간식'],                     url: NS('강아지 H자형 하네스 산책') },
+        { emoji:'🛏️', type:'켄넬',       name:'분리불안 안심 철제 켄넬',       desc:'독립 공간 형성으로 분리불안 훈련에 도움을 주는 켄넬',              price:'최저가 검색', tags:['켄넬','진정영양제'],                  url: NS('강아지 철제 켄넬 분리불안') },
       ],
       en: [
-        { emoji:'🥣', type:'Food',          name:'Hypoallergenic Premium Food',  desc:'Protein-restricted formula for dogs with skin issues or appetite loss',       price:'$98',  tags:['food','skin-supplement','omega3'] },
-        { emoji:'🍖', type:'Wet Food',       name:'Digestive Wet Food',           desc:'High-moisture food ideal for pets with digestive issues or poor appetite',    price:'$37',  tags:['wet-food','food','digestive-supplement'] },
-        { emoji:'🦴', type:'Treats',         name:'Low-Calorie Training Treats',  desc:'Soft low-calorie treats ideal for training and rewards',                      price:'$14',  tags:['treats','harness'] },
-        { emoji:'💊', type:'Skin Supp.',     name:'Skin Barrier Omega Care',      desc:'Supplement for pets with dryness and frequent scratching',                    price:'$68',  tags:['skin-supplement','omega3','shampoo'] },
-        { emoji:'🦵', type:'Joint Supp.',    name:'Joint Care MSM Supplement',    desc:'Supports joint health for active or senior pets',                             price:'$48',  tags:['joint-supplement'] },
-        { emoji:'🌿', type:'Digestive',      name:'Probiotic Digestive Care',     desc:'Pet-specific probiotic for gut health and digestion improvement',             price:'$34',  tags:['digestive-supplement','probiotic','wet-food'] },
-        { emoji:'😌', type:'Calming Supp.',  name:'Separation Anxiety Relief',    desc:'Natural calming supplement for anxiety, barking, and night crying',           price:'$29',  tags:['calming-supplement','kennel','nose-work'] },
-        { emoji:'🧸', type:'Nose Work',      name:'Night Calm Nosework Toy',      desc:'Toy to help cats that cry at night and pets with separation anxiety',         price:'$14',  tags:['nose-work','toy','calming-supplement'] },
-        { emoji:'🐟', type:'Scratcher',      name:'Cat Scratching Board',         desc:'High-durability scratcher for stress relief and claw care',                   price:'$18',  tags:['scratcher','cat-tower'] },
-        { emoji:'🏠', type:'Cat Tower',      name:'Multi-Level Cat Tower',        desc:'Satisfies exercise, sleep, and territory needs for indoor cats',              price:'$68',  tags:['cat-tower','scratcher','nose-work'] },
-        { emoji:'🚿', type:'Shampoo',        name:'Sensitive Skin Shampoo',       desc:'Mild pH-balanced shampoo for pets with sensitive skin or allergies',          price:'$26',  tags:['shampoo','skin-supplement'] },
-        { emoji:'🦷', type:'Dental Care',    name:'Enzyme Toothpaste + Brush Set',desc:'Dental care set to prevent bad breath and tartar buildup',                   price:'$21',  tags:['dental'] },
-        { emoji:'🪣', type:'Cat Litter',     name:'Antibacterial Tofu Litter',    desc:'Unscented, low-dust tofu litter to reduce litter box avoidance',             price:'$25',  tags:['litter'] },
-        { emoji:'🎽', type:'Harness',        name:'H-Type Anti-Pull Harness',     desc:'Reduces pulling behavior and trachea strain during walks',                    price:'$32',  tags:['harness','treats'] },
-        { emoji:'🛏️', type:'Kennel',         name:'Anxiety-Relief Wire Kennel',   desc:'Creates a safe den space to help train separation anxiety',                   price:'$52',  tags:['kennel','calming-supplement'] },
+        { emoji:'🥣', type:'Food',         name:'Hypoallergenic Dog Food',       desc:'Protein-restricted formula for dogs with skin issues or appetite loss',      price:'Search Price', tags:['food','skin-supplement','omega3'],              url: AMZ('hypoallergenic dog food limited ingredient') },
+        { emoji:'🍖', type:'Wet Food',      name:'Digestive Wet Food',            desc:'High-moisture food ideal for pets with digestive issues or poor appetite',   price:'Search Price', tags:['wet-food','food','digestive-supplement'],       url: AMZ('digestive care wet dog food') },
+        { emoji:'🦴', type:'Treats',        name:'Low-Calorie Training Treats',   desc:'Soft low-calorie treats ideal for training and rewards',                     price:'Search Price', tags:['treats','harness'],                             url: AMZ('low calorie dog training treats soft') },
+        { emoji:'💊', type:'Skin Supp.',    name:'Omega-3 Skin Supplement',       desc:'Supplement for pets with dryness and frequent scratching',                   price:'Search Price', tags:['skin-supplement','omega3','shampoo'],           url: AMZ('dog skin omega 3 supplement fish oil') },
+        { emoji:'🦵', type:'Joint Supp.',   name:'Joint Care MSM Supplement',     desc:'Supports joint health for active or senior pets',                            price:'Search Price', tags:['joint-supplement'],                             url: AMZ('dog joint supplement MSM glucosamine') },
+        { emoji:'🌿', type:'Digestive',     name:'Probiotic Digestive Care',      desc:'Pet-specific probiotic for gut health and digestion improvement',            price:'Search Price', tags:['digestive-supplement','probiotic','wet-food'],  url: AMZ('dog probiotic digestive supplement') },
+        { emoji:'😌', type:'Calming',       name:'Separation Anxiety Relief',     desc:'Natural calming supplement for anxiety, barking, and night crying',          price:'Search Price', tags:['calming-supplement','kennel','nose-work'],      url: AMZ('dog calming supplement separation anxiety') },
+        { emoji:'🧸', type:'Nose Work',     name:'Nosework Snuffle Mat',          desc:'Toy to help pets with separation anxiety and cats that cry at night',        price:'Search Price', tags:['nose-work','toy','calming-supplement'],         url: AMZ('dog nosework snuffle mat enrichment toy') },
+        { emoji:'🐟', type:'Scratcher',     name:'Cat Scratching Board',          desc:'High-durability scratcher for stress relief and claw care',                  price:'Search Price', tags:['scratcher','cat-tower'],                        url: AMZ('cat scratching board cardboard') },
+        { emoji:'🏠', type:'Cat Tower',     name:'Multi-Level Cat Tree',          desc:'Satisfies exercise, sleep, and territory needs for indoor cats',             price:'Search Price', tags:['cat-tower','scratcher','nose-work'],            url: AMZ('cat tree tower multi level') },
+        { emoji:'🚿', type:'Shampoo',       name:'Sensitive Skin Dog Shampoo',    desc:'Mild pH-balanced shampoo for pets with sensitive skin or allergies',         price:'Search Price', tags:['shampoo','skin-supplement'],                   url: AMZ('dog shampoo sensitive skin hypoallergenic') },
+        { emoji:'🦷', type:'Dental Care',   name:'Enzyme Toothpaste + Brush Set', desc:'Dental care set to prevent bad breath and tartar buildup',                  price:'Search Price', tags:['dental'],                                       url: AMZ('dog cat enzymatic toothpaste dental kit') },
+        { emoji:'🪣', type:'Cat Litter',    name:'Tofu Cat Litter',               desc:'Unscented, low-dust tofu litter to reduce litter box avoidance',            price:'Search Price', tags:['litter'],                                       url: AMZ('tofu cat litter unscented') },
+        { emoji:'🎽', type:'Harness',       name:'No-Pull Dog Harness',           desc:'Reduces pulling behavior and trachea strain during walks',                   price:'Search Price', tags:['harness','treats'],                             url: AMZ('no pull dog harness adjustable') },
+        { emoji:'🛏️', type:'Kennel',        name:'Dog Crate Wire Kennel',         desc:'Creates a safe den space to help train separation anxiety',                  price:'Search Price', tags:['kennel','calming-supplement'],                  url: AMZ('dog crate wire kennel foldable') },
       ]
     };
 
@@ -1890,7 +1898,7 @@
         return;
       }
 
-      const detailLabel = t('rec.detail');
+      const shopLabel = currentLang === 'ko' ? '네이버쇼핑 →' : 'Shop Now →';
       recGrid.innerHTML = scored.map(p => `
         <div class="rec-card">
           <div class="rec-card-top">
@@ -1903,7 +1911,7 @@
           <div class="rec-desc">${p.desc}</div>
           <div class="rec-footer">
             <span class="rec-price">${p.price}</span>
-            <a class="rec-btn" href="#products">${detailLabel}</a>
+            <a class="rec-btn" href="${p.url}" target="_blank" rel="noopener noreferrer">${shopLabel}</a>
           </div>
         </div>
       `).join('');
