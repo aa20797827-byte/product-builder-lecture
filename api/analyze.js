@@ -90,7 +90,7 @@ JSON 형식:
           systemInstruction: { parts: [{ text: systemPrompt }] },
           contents: [{ role: 'user', parts: [{ text: text.trim() }] }],
           generationConfig: {
-            maxOutputTokens: 1200,
+            maxOutputTokens: 2500,
             temperature: 0.7,
             responseMimeType: 'application/json',
           }
@@ -110,12 +110,26 @@ JSON 형식:
     const rawText = data.candidates?.[0]?.content?.parts?.[0]?.text;
     if (!rawText) throw new Error('AI 응답을 받지 못했습니다.');
 
-    // JSON 파싱 (Gemini가 JSON mode라도 예외 처리)
+    // JSON 파싱 (잘림 대비 fallback 포함)
     let parsed;
     try {
       parsed = JSON.parse(rawText);
     } catch {
-      parsed = { analysis: rawText, tags: [] };
+      // JSON이 잘린 경우: 정규식으로 analysis / tags 추출
+      const aMatch = rawText.match(/"analysis"\s*:\s*"([\s\S]+?)"\s*[,}]/);
+      const tMatch = rawText.match(/"tags"\s*:\s*\[([\s\S]*?)\]/);
+
+      const analysisRaw = aMatch ? aMatch[1] : rawText;
+      const analysisText = analysisRaw
+        .replace(/\\n/g, '\n')
+        .replace(/\\"/g, '"')
+        .replace(/\\\\/g, '\\');
+
+      const tags = tMatch
+        ? (tMatch[1].match(/"([^"]+)"/g) || []).map(s => s.replace(/"/g, ''))
+        : [];
+
+      parsed = { analysis: analysisText, tags };
     }
 
     return res.status(200).json({
