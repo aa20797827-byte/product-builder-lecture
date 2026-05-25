@@ -1,6 +1,9 @@
 {
   "rewrites": [
-    { "source": "/sitemap.xml",          "destination": "/api/sitemap" },
-    { "source": "/((?!api/)(?!ads\\.txt)(?!robots\\.txt).*)", "destination": "/index.html" }
+    { "source": "/sitemap.xml", "destination": "/api/sitemap" },
+    {
+      "source": "/((?!api/)(?!ads\\.txt)(?!robots\\.txt)(?!manifest\\.json)(?!og-image\\.).*)",
+      "destination": "/index.html"
+    }
   ]
 }
