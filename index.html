@@ -1023,12 +1023,7 @@
     }
 
     @media (max-width: 980px) {
-      .contact-inner { grid-template-columns: 1fr; gap: 36px; }
-    }
-
-    @media (max-width: 640px) {
-      .form-row { grid-template-columns: 1fr; }
-      .contact-form-wrap { padding: 24px; }
+      .contact .shell > div { grid-template-columns: 1fr !important; gap: 32px !important; }
     }
 
     /* ── Footer ── */
@@ -1174,7 +1169,7 @@
         <a href="#curation" data-i18n="nav.curation">AI 큐레이션</a>
         <a href="#products" data-i18n="nav.products">추천 상품</a>
         <a href="#reviews" data-i18n="nav.reviews">후기</a>
-        <a href="#contact" data-i18n="nav.contact">제휴 문의</a>
+        <a href="/contact.html" data-i18n="nav.contact">제휴 문의</a>
       </nav>
 
       <div class="nav-right">
@@ -1463,8 +1458,6 @@
     <!-- ══ AD BANNER 2 (후기 하단) ══ -->
     <div class="ad-section">
       <div class="shell">
-        <!-- Google AdSense 광고 단위 2
-             ※ data-ad-client 와 data-ad-slot 을 실제 값으로 교체하세요 -->
         <ins class="adsbygoogle ad-unit"
              style="display:block"
              data-ad-client="ca-pub-4472766689342651"
@@ -1475,100 +1468,31 @@
       </div>
     </div>
 
-    <!-- ══ CONTACT FORM ══ -->
+    <!-- ══ PARTNERSHIP CTA ══ -->
     <section class="contact" id="contact">
       <div class="shell">
-        <div class="contact-inner">
-
-          <!-- Left: Info -->
-          <div class="contact-info">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;padding:16px 0;">
+          <div>
             <div class="section-eyebrow" data-i18n="contact.eyebrow">제휴 문의</div>
-            <h3 data-i18n="contact.title">PawPick AI와 함께<br/>성장할 파트너를 찾습니다</h3>
-            <p data-i18n="contact.desc">브랜드·수의사·반려동물 전문가·유통사 등 다양한 형태의 제휴를 환영합니다. 아래 폼을 작성해 주시면 영업일 기준 2일 이내 답변드립니다.</p>
-            <div class="contact-points">
-              <div class="contact-point">
-                <span class="contact-point-icon">🛒</span>
-                <span data-i18n="contact.pt1">상품 입점 · 커머스 제휴</span>
-              </div>
-              <div class="contact-point">
-                <span class="contact-point-icon">🏥</span>
-                <span data-i18n="contact.pt2">수의사 · 전문가 협력</span>
-              </div>
-              <div class="contact-point">
-                <span class="contact-point-icon">📣</span>
-                <span data-i18n="contact.pt3">마케팅 · 콘텐츠 협업</span>
-              </div>
-              <div class="contact-point">
-                <span class="contact-point-icon">💼</span>
-                <span data-i18n="contact.pt4">투자 · 기타 비즈니스 문의</span>
-              </div>
+            <h3 style="font-size:clamp(22px,3vw,34px);font-weight:900;color:#0d1b34;letter-spacing:-0.02em;line-height:1.3;margin:14px 0 16px;word-break:keep-all;" data-i18n="contact.title">PawPick AI와 함께<br/>성장할 파트너를 찾습니다</h3>
+            <p style="color:var(--muted);font-size:15px;line-height:1.75;word-break:keep-all;margin-bottom:28px;" data-i18n="contact.desc">브랜드·수의사·반려동물 전문가·유통사 등 다양한 형태의 제휴를 환영합니다. 영업일 기준 2일 이내 답변드립니다.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:10px;">
+              <span style="padding:8px 14px;border:1px solid var(--line);border-radius:999px;background:#fff;font-size:13px;font-weight:750;color:var(--text);">🛒 상품 입점</span>
+              <span style="padding:8px 14px;border:1px solid var(--line);border-radius:999px;background:#fff;font-size:13px;font-weight:750;color:var(--text);">🏥 수의사 협력</span>
+              <span style="padding:8px 14px;border:1px solid var(--line);border-radius:999px;background:#fff;font-size:13px;font-weight:750;color:var(--text);">📣 마케팅 협업</span>
+              <span style="padding:8px 14px;border:1px solid var(--line);border-radius:999px;background:#fff;font-size:13px;font-weight:750;color:var(--text);">💼 투자 문의</span>
             </div>
           </div>
-
-          <!-- Right: Form -->
-          <div class="contact-form-wrap">
-            <div id="formResult" class="form-result"></div>
-
-            <form id="contactForm" action="https://formspree.io/f/mykvprdg" method="POST" novalidate>
-              <div class="form-row">
-                <div class="form-group">
-                  <label class="form-label" for="fname">
-                    <span data-i18n="contact.form.name">이름</span><span class="required">*</span>
-                  </label>
-                  <input class="form-input" id="fname" type="text" name="name"
-                    data-i18n-placeholder="contact.form.namePh" placeholder="홍길동" required />
-                </div>
-                <div class="form-group">
-                  <label class="form-label" for="fcompany">
-                    <span data-i18n="contact.form.company">회사·기관명</span>
-                  </label>
-                  <input class="form-input" id="fcompany" type="text" name="company"
-                    data-i18n-placeholder="contact.form.companyPh" placeholder="(주)펫케어" />
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label class="form-label" for="femail">
-                  <span data-i18n="contact.form.email">이메일</span><span class="required">*</span>
-                </label>
-                <input class="form-input" id="femail" type="email" name="email"
-                  data-i18n-placeholder="contact.form.emailPh" placeholder="hello@example.com" required />
-              </div>
-
-              <div class="form-group">
-                <label class="form-label" for="ftype">
-                  <span data-i18n="contact.form.type">문의 유형</span><span class="required">*</span>
-                </label>
-                <select class="form-select" id="ftype" name="inquiry_type" required>
-                  <option value="" data-i18n="contact.form.typeDefault">유형을 선택해 주세요</option>
-                  <option value="commerce" data-i18n="contact.form.type1">상품 입점 · 커머스 제휴</option>
-                  <option value="vet" data-i18n="contact.form.type2">수의사 · 전문가 협력</option>
-                  <option value="marketing" data-i18n="contact.form.type3">마케팅 · 콘텐츠 협업</option>
-                  <option value="investment" data-i18n="contact.form.type4">투자 · 기타 비즈니스</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label class="form-label" for="fmsg">
-                  <span data-i18n="contact.form.message">문의 내용</span><span class="required">*</span>
-                </label>
-                <textarea class="form-textarea" id="fmsg" name="message"
-                  data-i18n-placeholder="contact.form.messagePh"
-                  placeholder="제휴 목적, 규모, 희망 협력 방식 등을 자유롭게 적어주세요." required></textarea>
-              </div>
-
-              <!-- honeypot spam protection -->
-              <input type="text" name="_gotcha" style="display:none" />
-
-              <button class="form-submit" type="submit" id="formSubmit" data-i18n="contact.form.submit">
-                문의 보내기 →
-              </button>
-              <p class="form-notice" data-i18n="contact.form.notice">
-                영업일 기준 2일 이내 이메일로 답변드립니다.
-              </p>
-            </form>
+          <div style="text-align:center;">
+            <div style="padding:48px 40px;border:1px solid var(--line);border-radius:28px;background:#fff;box-shadow:var(--soft-shadow);">
+              <div style="font-size:48px;margin-bottom:16px;">🤝</div>
+              <p style="font-size:15px;color:var(--muted);line-height:1.7;margin-bottom:28px;word-break:keep-all;">제휴 제안서나 협력 아이디어가 있으신가요? 아래 버튼을 눌러 문의 페이지로 이동하세요.</p>
+              <a href="/contact.html" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:16px 24px;border:0;border-radius:14px;background:linear-gradient(145deg,var(--navy),var(--blue));color:#fff;font-size:15px;font-weight:850;box-shadow:0 14px 32px rgba(8,35,92,0.22);transition:transform 0.2s;text-decoration:none;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'">
+                문의하기 →
+              </a>
+              <p style="margin-top:14px;font-size:12px;color:var(--muted);">⚡ 영업일 기준 2일 이내 답변</p>
+            </div>
           </div>
-
         </div>
       </div>
     </section>
@@ -1592,7 +1516,7 @@
       <div style="display:flex;gap:18px;align-items:center;flex-wrap:wrap;justify-content:center;">
         <a href="/privacy.html" style="color:#64748b;font-size:13px;font-weight:700;text-decoration:none;" onmouseover="this.style.color='#08235c'" onmouseout="this.style.color='#64748b'">개인정보 처리방침</a>
         <a href="/terms.html"   style="color:#64748b;font-size:13px;font-weight:700;text-decoration:none;" onmouseover="this.style.color='#08235c'" onmouseout="this.style.color='#64748b'">이용약관</a>
-        <a href="mailto:aa20797827@gmail.com" style="color:#64748b;font-size:13px;font-weight:700;text-decoration:none;" onmouseover="this.style.color='#08235c'" onmouseout="this.style.color='#64748b'">문의하기</a>
+        <a href="/contact.html" style="color:#64748b;font-size:13px;font-weight:700;text-decoration:none;" onmouseover="this.style.color='#08235c'" onmouseout="this.style.color='#64748b'">문의하기</a>
       </div>
     </div>
   </footer>

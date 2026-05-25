@@ -16,6 +16,12 @@ module.exports = async function handler(req, res) {
     <xhtml:link rel="alternate" hreflang="en" href="https://product-builder-lecture-nine.vercel.app/" />
   </url>
   <url>
+    <loc>https://product-builder-lecture-nine.vercel.app/contact.html</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://product-builder-lecture-nine.vercel.app/privacy.html</loc>
     <lastmod>${today}</lastmod>
     <changefreq>monthly</changefreq>
