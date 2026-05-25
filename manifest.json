@@ -1,0 +1,13 @@
+{
+  "name": "PawPick AI — 반려동물 맞춤 AI 큐레이션",
+  "short_name": "PawPick AI",
+  "description": "반려동물의 고민을 AI가 즉시 분석해 해결 루틴과 맞춤 상품을 추천합니다",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#08235c",
+  "lang": "ko",
+  "categories": ["lifestyle", "health", "pets"],
+  "screenshots": [],
+  "icons": []
+}
