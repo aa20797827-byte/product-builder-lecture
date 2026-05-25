@@ -1,36 +1,14 @@
 {
   "version": 2,
   "builds": [
-    { "src": "api/analyze.js", "use": "@vercel/node" },
-    { "src": "index.html",    "use": "@vercel/static" },
-    { "src": "sitemap.xml",   "use": "@vercel/static" },
-    { "src": "robots.txt",    "use": "@vercel/static" },
-    { "src": "ads.txt",       "use": "@vercel/static" }
-  ],
-  "headers": [
-    {
-      "source": "/sitemap.xml",
-      "headers": [
-        { "key": "Content-Type", "value": "application/xml; charset=utf-8" },
-        { "key": "Cache-Control", "value": "public, max-age=86400" }
-      ]
-    },
-    {
-      "source": "/robots.txt",
-      "headers": [
-        { "key": "Content-Type", "value": "text/plain; charset=utf-8" }
-      ]
-    },
-    {
-      "source": "/ads.txt",
-      "headers": [
-        { "key": "Content-Type", "value": "text/plain; charset=utf-8" }
-      ]
-    }
+    { "src": "api/*.js",    "use": "@vercel/node" },
+    { "src": "index.html",  "use": "@vercel/static" },
+    { "src": "robots.txt",  "use": "@vercel/static" },
+    { "src": "ads.txt",     "use": "@vercel/static" }
   ],
   "routes": [
     { "src": "/api/analyze",  "dest": "/api/analyze.js" },
-    { "src": "/sitemap.xml",  "dest": "/sitemap.xml" },
+    { "src": "/sitemap.xml",  "dest": "/api/sitemap.js" },
     { "src": "/robots.txt",   "dest": "/robots.txt" },
     { "src": "/ads.txt",      "dest": "/ads.txt" },
     { "src": "/(.*)",         "dest": "/index.html" }
