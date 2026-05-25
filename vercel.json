@@ -2,10 +2,14 @@
   "version": 2,
   "builds": [
     { "src": "api/analyze.js", "use": "@vercel/node" },
-    { "src": "index.html", "use": "@vercel/static" }
+    { "src": "index.html",    "use": "@vercel/static" },
+    { "src": "sitemap.xml",   "use": "@vercel/static" },
+    { "src": "robots.txt",    "use": "@vercel/static" }
   ],
   "routes": [
-    { "src": "/api/analyze", "dest": "/api/analyze.js" },
-    { "src": "/(.*)", "dest": "/index.html" }
+    { "src": "/api/analyze",  "dest": "/api/analyze.js" },
+    { "src": "/sitemap.xml",  "dest": "/sitemap.xml" },
+    { "src": "/robots.txt",   "dest": "/robots.txt" },
+    { "src": "/(.*)",         "dest": "/index.html" }
   ]
 }
