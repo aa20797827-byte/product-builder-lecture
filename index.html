@@ -1377,44 +1377,6 @@
     .scroll-top-btn.show { opacity: 1; transform: translateY(0); }
     .scroll-top-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(8,35,92,0.38); }
 
-    /* ── FAQ 검색 ── */
-    .faq-search-wrap {
-      max-width: 820px;
-      margin: 0 auto 24px;
-      position: relative;
-    }
-    .faq-search-icon {
-      position: absolute;
-      left: 16px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--muted);
-      font-size: 15px;
-      pointer-events: none;
-    }
-    .faq-search-input {
-      width: 100%;
-      padding: 13px 18px 13px 44px;
-      border: 1.5px solid var(--line);
-      border-radius: 14px;
-      font-size: 14px;
-      font-family: inherit;
-      color: var(--ink);
-      background: #fff;
-      outline: none;
-      transition: border-color 0.18s, box-shadow 0.18s;
-    }
-    .faq-search-input:focus {
-      border-color: var(--blue);
-      box-shadow: 0 0 0 3px rgba(31,94,255,0.1);
-    }
-    .faq-no-result {
-      text-align: center;
-      color: var(--muted);
-      padding: 32px 0;
-      font-size: 15px;
-      display: none;
-    }
 
     /* ── AI 분석 결과 구조화 스타일 ── */
     .ai-result-wrap { display: flex; flex-direction: column; gap: 14px; }
@@ -1990,19 +1952,6 @@
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
       </div>
     </div>
-    <div class="ad-section" style="padding-top:12px;">
-      <div class="shell">
-        <div class="ad-label">광고</div>
-        <ins class="adsbygoogle ad-unit"
-             style="display:block"
-             data-ad-client="ca-pub-4472766689342651"
-             data-ad-slot="XXXXXXXXXX"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-      </div>
-    </div>
-
     <!-- ══ FAQ ══ -->
     <section class="faq-section" id="faq">
       <div class="shell">
@@ -2012,13 +1961,17 @@
           <p class="section-desc">AI 분석 전에 먼저 확인해 보세요. 증상이 심하거나 지속될 경우 반드시 수의사와 상담하세요.</p>
         </div>
 
-        <!-- FAQ 검색 -->
-        <div class="faq-search-wrap">
-          <span class="faq-search-icon">🔍</span>
-          <input class="faq-search-input" id="faqSearchInput" type="text"
-            placeholder="질문 검색 (예: 고양이 울음, 강아지 피부...)" />
+        <!-- 광고 배너 -->
+        <div class="ad-section" style="padding: 0 0 24px;">
+          <div class="ad-label">광고</div>
+          <ins class="adsbygoogle ad-unit"
+               style="display:block"
+               data-ad-client="ca-pub-4472766689342651"
+               data-ad-slot="XXXXXXXXXX"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
         </div>
-        <div class="faq-no-result" id="faqNoResult">😔 검색 결과가 없습니다. 다른 키워드로 검색해 보세요.</div>
 
         <div class="faq-list">
 
@@ -3072,33 +3025,8 @@
       if (statCards[0]) observer.observe(statCards[0].closest('.stats') || statCards[0]);
     }
 
-    /* ════════════════════════════════════
-       FAQ 검색 필터
-    ════════════════════════════════════ */
-    function initFAQSearch() {
-      const input = document.getElementById('faqSearchInput');
-      const noResult = document.getElementById('faqNoResult');
-      if (!input) return;
-
-      input.addEventListener('input', () => {
-        const q = input.value.trim().toLowerCase();
-        const items = document.querySelectorAll('.faq-item');
-        let visible = 0;
-
-        items.forEach(item => {
-          const text = item.textContent.toLowerCase();
-          if (!q || text.includes(q)) {
-            item.style.display = '';
-            visible++;
-          } else {
-            item.style.display = 'none';
-            item.classList.remove('open');
-          }
-        });
-
-        if (noResult) noResult.style.display = visible === 0 ? 'block' : 'none';
-      });
-    }
+    /* FAQ 검색 제거 — 검색창 없음 */
+    function initFAQSearch() {}
 
     /* ════════════════════════════════════
        AI 분석 결과 마크다운 파서
