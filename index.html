@@ -528,6 +528,92 @@
 
     .result-preview.show { display: block; }
 
+    /* ── AI 추천 상품 결과 ── */
+    .rec-products {
+      display: none;
+      margin-top: 20px;
+      text-align: left;
+    }
+    .rec-products.show { display: block; }
+
+    .rec-products-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+      font-size: 15px;
+      font-weight: 900;
+      color: var(--navy);
+    }
+
+    .rec-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    @media (max-width: 640px) {
+      .rec-grid { grid-template-columns: 1fr; }
+    }
+
+    .rec-card {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+      box-shadow: 0 6px 18px rgba(15,23,42,0.05);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .rec-card:hover { transform: translateY(-4px); box-shadow: var(--soft-shadow); }
+
+    .rec-card-top {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .rec-emoji { font-size: 28px; }
+    .rec-type {
+      display: inline-block;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: var(--blue-soft);
+      color: var(--navy);
+      font-size: 11px;
+      font-weight: 850;
+      margin-bottom: 4px;
+    }
+    .rec-name {
+      font-size: 14px;
+      font-weight: 900;
+      color: var(--ink);
+      line-height: 1.35;
+    }
+    .rec-desc {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.55;
+      margin: 6px 0 10px;
+    }
+    .rec-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .rec-price { font-size: 14px; font-weight: 900; color: var(--ink); }
+    .rec-btn {
+      padding: 7px 12px;
+      border-radius: 9px;
+      background: var(--navy);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 850;
+      white-space: nowrap;
+      transition: background 0.15s;
+    }
+    .rec-btn:hover { background: var(--blue); }
+
     /* ── Products / Reviews ── */
     .products-grid, .reviews-grid {
       display: grid;
@@ -1154,6 +1240,15 @@
         </div>
 
         <div id="analysisResult" class="result-preview"></div>
+
+        <!-- AI 추천 상품 -->
+        <div id="productRecommendations" class="rec-products">
+          <div class="rec-products-title">
+            🛍️ <span data-i18n="rec.title">AI가 추천하는 맞춤 상품</span>
+          </div>
+          <div id="recGrid" class="rec-grid"></div>
+        </div>
+
       </div>
     </section>
 
@@ -1520,15 +1615,9 @@
         'contact.form.error': '❌ 전송 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.',
         'contact.form.required': '필수 항목을 모두 입력해 주세요.',
 
-        'result.header': 'AI 분석 결과',
-        'result.inputLabel': '입력한 고민',
-        'result.causesLabel': '예상 원인',
-        'result.causes': '- 생활 루틴 변화 가능성\n- 스트레스 또는 활동량 부족 가능성\n- 식습관, 피부, 환경 요인 확인 필요',
-        'result.routinesLabel': '추천 해결 루틴',
-        'result.routines': '1. 최근 환경 변화와 식사 패턴을 기록해 보세요.\n2. 수면, 놀이, 산책 또는 화장실 루틴을 일정하게 유지하세요.\n3. 증상이 반복되면 수의사 상담을 우선하세요.\n4. 필요한 경우에만 사료, 영양제, 장난감 등 보조 상품을 비교하세요.',
-        'result.criteriaLabel': '추천 기준',
-        'result.criteria': '- 과장 광고보다 성분과 실제 리뷰를 확인\n- 반려동물의 나이, 품종, 건강 상태에 맞는지 확인\n- 구매 전 최신 상세페이지와 후기를 함께 확인',
         'result.empty': '반려동물의 고민이 아직 입력되지 않았습니다.',
+        'rec.title': 'AI가 추천하는 맞춤 상품',
+        'rec.detail': '자세히 보기',
       },
 
       en: {
@@ -1659,15 +1748,9 @@
         'contact.form.error': '❌ Something went wrong. Please try again later.',
         'contact.form.required': 'Please fill in all required fields.',
 
-        'result.header': 'AI Analysis Result',
-        'result.inputLabel': 'Your concern',
-        'result.causesLabel': 'Possible Causes',
-        'result.causes': '- Possible change in daily routine\n- Possible stress or lack of activity\n- Diet, skin, or environmental factors to check',
-        'result.routinesLabel': 'Recommended Care Routine',
-        'result.routines': '1. Record recent environmental changes and eating patterns.\n2. Keep sleep, play, walk, or litter box routines consistent.\n3. Consult a veterinarian if symptoms persist.\n4. Compare supplementary products (food, supplements, toys) only when necessary.',
-        'result.criteriaLabel': 'Selection Criteria',
-        'result.criteria': '- Check ingredients and real reviews over marketing claims\n- Ensure it suits your pet\'s age, breed, and health\n- Review the latest product page and reviews before purchasing',
         'result.empty': 'No pet concern has been entered yet.',
+        'rec.title': 'AI-Recommended Products for You',
+        'rec.detail': 'View Details',
       }
     };
 
@@ -1716,6 +1799,7 @@
       const result = document.getElementById('analysisResult');
       result.textContent = '';
       result.classList.remove('show');
+      document.getElementById('productRecommendations').classList.remove('show');
 
       /* Update toggle button states */
       document.getElementById('btnKo').classList.toggle('active', currentLang === 'ko');
@@ -1743,12 +1827,97 @@
       });
     }
 
+    /* ════════════════════════════════════
+       상품 데이터베이스
+    ════════════════════════════════════ */
+    const PRODUCTS = {
+      ko: [
+        { emoji:'🥣', type:'사료',       name:'저알러지 프리미엄 사료',     desc:'피부 가려움·식욕 저하 반려견을 위한 단백질 제한형 사료',             price:'₩128,000', tags:['사료','피부','오메가3','알러지'] },
+        { emoji:'🍖', type:'습식사료',    name:'소화 배려 습식사료',          desc:'소화기가 약하거나 밥을 잘 안 먹는 반려동물용 고수분 사료',           price:'₩48,000',  tags:['습식사료','사료','소화영양제','식욕'] },
+        { emoji:'🦴', type:'간식',        name:'저칼로리 트레이닝 간식',      desc:'훈련·보상용으로 적합한 소프트 타입 저칼로리 간식',                   price:'₩18,000',  tags:['간식','하네스'] },
+        { emoji:'💊', type:'피부영양제',  name:'피부 장벽 오메가 케어',       desc:'건조함·긁는 행동이 잦은 반려동물의 피부 장벽 관리 영양제',           price:'₩89,000',  tags:['피부영양제','오메가3','피부','샴푸','알러지'] },
+        { emoji:'🦵', type:'관절영양제',  name:'관절 케어 MSM 영양제',        desc:'활동량이 많거나 노령 반려동물의 관절 건강 지원',                     price:'₩62,000',  tags:['관절영양제'] },
+        { emoji:'🌿', type:'소화영양제',  name:'유산균 소화 케어',            desc:'장 건강과 소화 개선을 위한 반려동물 전용 유산균',                    price:'₩44,000',  tags:['소화영양제','유산균','습식사료'] },
+        { emoji:'😌', type:'진정영양제',  name:'분리불안 진정 영양제',        desc:'외출 시 불안·짖음·야간 울음을 완화하는 천연 성분 제품',              price:'₩38,000',  tags:['진정영양제','켄넬','노즈워크'] },
+        { emoji:'🧸', type:'노즈워크',    name:'야간 안정 노즈워크 토이',     desc:'밤에 우는 고양이·분리불안 반려동물의 에너지 소모 장난감',            price:'₩18,900',  tags:['노즈워크','장난감','진정영양제'] },
+        { emoji:'🐟', type:'스크래쳐',    name:'고양이 스크래칭 보드',        desc:'스트레스 해소와 발톱 관리를 위한 고내구성 스크래쳐',                 price:'₩24,000',  tags:['스크래쳐','캣타워'] },
+        { emoji:'🏠', type:'캣타워',      name:'멀티 캣타워 5단',             desc:'활동량이 부족한 고양이의 운동·수면·영역감각 충족',                   price:'₩89,000',  tags:['캣타워','스크래쳐','노즈워크'] },
+        { emoji:'🚿', type:'샴푸',        name:'저자극 피부 진정 샴푸',       desc:'민감한 피부·알러지가 있는 반려동물용 약산성 샴푸',                   price:'₩34,000',  tags:['샴푸','피부영양제'] },
+        { emoji:'🦷', type:'덴탈케어',    name:'효소 치약 + 핑거브러쉬 세트', desc:'구강 냄새와 치석 예방을 위한 반려동물 전용 덴탈케어',               price:'₩28,000',  tags:['치아'] },
+        { emoji:'🪣', type:'고양이모래',  name:'두부 항균 고양이 모래',       desc:'화장실 기피를 줄이는 무향·저분진 두부 모래',                         price:'₩32,000',  tags:['모래'] },
+        { emoji:'🎽', type:'하네스',      name:'산책 안정 H자형 하네스',      desc:'외출 시 당기는 행동과 기관지 부담을 줄이는 하네스',                  price:'₩42,000',  tags:['하네스','간식'] },
+        { emoji:'🛏️', type:'켄넬',        name:'분리불안 안심 철제 켄넬',     desc:'독립 공간 형성으로 분리불안 훈련에 도움을 주는 켄넬',                price:'₩68,000',  tags:['켄넬','진정영양제'] },
+      ],
+      en: [
+        { emoji:'🥣', type:'Food',          name:'Hypoallergenic Premium Food',  desc:'Protein-restricted formula for dogs with skin issues or appetite loss',       price:'$98',  tags:['food','skin-supplement','omega3'] },
+        { emoji:'🍖', type:'Wet Food',       name:'Digestive Wet Food',           desc:'High-moisture food ideal for pets with digestive issues or poor appetite',    price:'$37',  tags:['wet-food','food','digestive-supplement'] },
+        { emoji:'🦴', type:'Treats',         name:'Low-Calorie Training Treats',  desc:'Soft low-calorie treats ideal for training and rewards',                      price:'$14',  tags:['treats','harness'] },
+        { emoji:'💊', type:'Skin Supp.',     name:'Skin Barrier Omega Care',      desc:'Supplement for pets with dryness and frequent scratching',                    price:'$68',  tags:['skin-supplement','omega3','shampoo'] },
+        { emoji:'🦵', type:'Joint Supp.',    name:'Joint Care MSM Supplement',    desc:'Supports joint health for active or senior pets',                             price:'$48',  tags:['joint-supplement'] },
+        { emoji:'🌿', type:'Digestive',      name:'Probiotic Digestive Care',     desc:'Pet-specific probiotic for gut health and digestion improvement',             price:'$34',  tags:['digestive-supplement','probiotic','wet-food'] },
+        { emoji:'😌', type:'Calming Supp.',  name:'Separation Anxiety Relief',    desc:'Natural calming supplement for anxiety, barking, and night crying',           price:'$29',  tags:['calming-supplement','kennel','nose-work'] },
+        { emoji:'🧸', type:'Nose Work',      name:'Night Calm Nosework Toy',      desc:'Toy to help cats that cry at night and pets with separation anxiety',         price:'$14',  tags:['nose-work','toy','calming-supplement'] },
+        { emoji:'🐟', type:'Scratcher',      name:'Cat Scratching Board',         desc:'High-durability scratcher for stress relief and claw care',                   price:'$18',  tags:['scratcher','cat-tower'] },
+        { emoji:'🏠', type:'Cat Tower',      name:'Multi-Level Cat Tower',        desc:'Satisfies exercise, sleep, and territory needs for indoor cats',              price:'$68',  tags:['cat-tower','scratcher','nose-work'] },
+        { emoji:'🚿', type:'Shampoo',        name:'Sensitive Skin Shampoo',       desc:'Mild pH-balanced shampoo for pets with sensitive skin or allergies',          price:'$26',  tags:['shampoo','skin-supplement'] },
+        { emoji:'🦷', type:'Dental Care',    name:'Enzyme Toothpaste + Brush Set',desc:'Dental care set to prevent bad breath and tartar buildup',                   price:'$21',  tags:['dental'] },
+        { emoji:'🪣', type:'Cat Litter',     name:'Antibacterial Tofu Litter',    desc:'Unscented, low-dust tofu litter to reduce litter box avoidance',             price:'$25',  tags:['litter'] },
+        { emoji:'🎽', type:'Harness',        name:'H-Type Anti-Pull Harness',     desc:'Reduces pulling behavior and trachea strain during walks',                    price:'$32',  tags:['harness','treats'] },
+        { emoji:'🛏️', type:'Kennel',         name:'Anxiety-Relief Wire Kennel',   desc:'Creates a safe den space to help train separation anxiety',                   price:'$52',  tags:['kennel','calming-supplement'] },
+      ]
+    };
+
+    /* ── 상품 추천 렌더링 ── */
+    function showRecommendedProducts(tags) {
+      const recWrap = document.getElementById('productRecommendations');
+      const recGrid = document.getElementById('recGrid');
+
+      if (!tags || tags.length === 0) {
+        recWrap.classList.remove('show');
+        return;
+      }
+
+      const db = PRODUCTS[currentLang] || PRODUCTS.ko;
+      // 태그가 겹치는 상품을 점수순 정렬 후 최대 3개
+      const scored = db
+        .map(p => ({ ...p, score: p.tags.filter(t => tags.includes(t)).length }))
+        .filter(p => p.score > 0)
+        .sort((a, b) => b.score - a.score)
+        .slice(0, 3);
+
+      if (scored.length === 0) {
+        recWrap.classList.remove('show');
+        return;
+      }
+
+      const detailLabel = t('rec.detail');
+      recGrid.innerHTML = scored.map(p => `
+        <div class="rec-card">
+          <div class="rec-card-top">
+            <span class="rec-emoji">${p.emoji}</span>
+            <div>
+              <div class="rec-type">${p.type}</div>
+              <div class="rec-name">${p.name}</div>
+            </div>
+          </div>
+          <div class="rec-desc">${p.desc}</div>
+          <div class="rec-footer">
+            <span class="rec-price">${p.price}</span>
+            <a class="rec-btn" href="#products">${detailLabel}</a>
+          </div>
+        </div>
+      `).join('');
+
+      recWrap.classList.add('show');
+    }
+
     /* ── Analyze (Real AI) ── */
     async function analyzeProblem() {
-      const input = document.getElementById('problemInput');
+      const input  = document.getElementById('problemInput');
       const result = document.getElementById('analysisResult');
-      const btn = document.querySelector('[onclick="analyzeProblem()"]');
-      const text = input.value.trim();
+      const recWrap = document.getElementById('productRecommendations');
+      const btn    = document.querySelector('[onclick="analyzeProblem()"]');
+      const text   = input.value.trim();
 
       if (!text) {
         result.textContent = t('result.empty');
@@ -1756,10 +1925,11 @@
         return;
       }
 
-      // 로딩 상태
+      // 로딩
       result.innerHTML = `<span class="ai-loading">${currentLang === 'ko' ? '🐾 AI가 분석 중이에요...' : '🐾 AI is analyzing...'}</span>`;
       result.classList.add('show');
-      if (btn) { btn.disabled = true; }
+      recWrap.classList.remove('show');
+      if (btn) btn.disabled = true;
 
       try {
         const res = await fetch('/api/analyze', {
@@ -1769,15 +1939,16 @@
         });
 
         const data = await res.json();
-
         if (!res.ok) throw new Error(data.error || 'AI 오류가 발생했습니다.');
 
         result.textContent = data.result;
+        showRecommendedProducts(data.tags);
 
       } catch (err) {
         result.innerHTML = `<span class="ai-error">⚠️ ${err.message || '오류가 발생했습니다. 잠시 후 다시 시도해 주세요.'}</span>`;
+        recWrap.classList.remove('show');
       } finally {
-        if (btn) { btn.disabled = false; }
+        if (btn) btn.disabled = false;
       }
     }
 
