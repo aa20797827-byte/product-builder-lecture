@@ -1352,9 +1352,108 @@
       50% { transform: translateY(-10px); }
     }
 
+    /* ── 모바일 햄버거 메뉴 ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 40px;
+      height: 40px;
+      padding: 8px;
+      background: none;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .hamburger span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: var(--navy);
+      border-radius: 2px;
+      transition: all 0.28s ease;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 70px;
+      left: 0; right: 0; bottom: 0;
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(16px);
+      z-index: 48;
+      flex-direction: column;
+      padding: 24px 20px 40px;
+      overflow-y: auto;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu nav { display: flex; flex-direction: column; gap: 8px; }
+    .mobile-menu nav a {
+      display: block;
+      padding: 16px 20px;
+      border-radius: 14px;
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--ink);
+      border: 1px solid var(--line);
+      background: #fff;
+      transition: background 0.18s, color 0.18s;
+    }
+    .mobile-menu nav a:hover { background: var(--blue-soft); color: var(--navy); border-color: #c7dcff; }
+    .mobile-menu-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+    }
+    .mobile-menu-actions .btn { width: 100%; justify-content: center; min-height: 52px; font-size: 15px; }
+
+    /* ── 칩 더보기 ── */
+    .chip-extra { display: none; }
+    .chip-extra.show { display: inline-flex; }
+    .chip-toggle {
+      padding: 9px 16px;
+      border: 1px dashed #c0cedf;
+      border-radius: 999px;
+      background: transparent;
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 750;
+      cursor: pointer;
+      transition: all 0.18s;
+    }
+    .chip-toggle:hover { background: var(--blue-soft); border-color: var(--blue); }
+
+    /* ── FAQ 더보기 ── */
+    .faq-extra { display: none; }
+    .faq-extra.show { display: block; }
+    .faq-more-wrap { text-align: center; margin-top: 20px; }
+    .faq-more-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 28px;
+      border: 1.5px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+      color: var(--navy);
+      font-size: 14px; font-weight: 800;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+      box-shadow: 0 4px 12px rgba(15,23,42,0.05);
+    }
+    .faq-more-btn:hover { border-color: var(--navy); background: var(--blue-soft); box-shadow: 0 6px 18px rgba(15,23,42,0.09); }
+
     /* ── Responsive ── */
     @media (max-width: 980px) {
       .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .nav-right .btn-outline, .nav-right .btn-primary { display: none; }
 
       .hero {
         grid-template-columns: 1fr;
@@ -1374,7 +1473,7 @@
       .nav-inner { height: 70px; }
       .brand { font-size: 18px; }
       .logo { width: 34px; height: 34px; border-radius: 12px; }
-      .nav-right .btn-outline { display: none; }
+      .mobile-menu { top: 70px; }
 
       h1 { font-size: 44px; }
       .hero { padding-top: 58px; }
@@ -1415,6 +1514,7 @@
         <a href="#curation" data-i18n="nav.curation">AI 큐레이션</a>
         <a href="#products" data-i18n="nav.products">추천 상품</a>
         <a href="#reviews" data-i18n="nav.reviews">후기</a>
+        <a href="#faq">FAQ</a>
         <a href="/contact.html" data-i18n="nav.contact">제휴 문의</a>
       </nav>
 
@@ -1426,9 +1526,28 @@
         </div>
         <a class="btn btn-outline" href="#curation" data-i18n="nav.free">무료 체험</a>
         <a class="btn btn-primary" href="#curation" data-i18n="nav.start">시작하기</a>
+        <!-- 모바일 햄버거 -->
+        <button class="hamburger" id="menuBtn" aria-label="메뉴" onclick="toggleMenu()">
+          <span></span><span></span><span></span>
+        </button>
       </div>
     </div>
   </header>
+
+  <!-- 모바일 전용 메뉴 -->
+  <div id="mobileMenu" class="mobile-menu" role="dialog" aria-label="모바일 메뉴">
+    <nav>
+      <a href="#features" onclick="closeMenu()">🔬 기능 소개</a>
+      <a href="#curation" onclick="closeMenu()">🤖 AI 큐레이션</a>
+      <a href="#products" onclick="closeMenu()">🛍️ 추천 상품</a>
+      <a href="#reviews" onclick="closeMenu()">💬 후기</a>
+      <a href="#faq" onclick="closeMenu()">❓ FAQ</a>
+      <a href="/contact.html">🤝 제휴 문의</a>
+    </nav>
+    <div class="mobile-menu-actions">
+      <a class="btn btn-primary" href="#curation" onclick="closeMenu()">AI 큐레이션 무료 체험 →</a>
+    </div>
+  </div>
 
   <main id="top">
 
@@ -1571,11 +1690,12 @@
           <button class="chip active" type="button" data-i18n="curation.chip4">🐈 고양이가 밤에 울어요</button>
           <button class="chip" type="button" data-i18n="curation.chip5">🐾 강아지가 밖에만 나가면 짖어요</button>
           <button class="chip" type="button" data-i18n="curation.chip6">🐈 고양이가 화장실을 안 써요</button>
-          <button class="chip" type="button">🐶 강아지가 자꾸 기침해요</button>
-          <button class="chip" type="button">🐱 고양이 털이 너무 많이 빠져요</button>
-          <button class="chip" type="button">🐶 강아지 눈물 자국이 심해요</button>
-          <button class="chip" type="button">🐱 고양이가 가구를 자꾸 긁어요</button>
-          <button class="chip" type="button">🐶 강아지가 계속 설사를 해요</button>
+          <button class="chip chip-extra" type="button">🐶 강아지가 자꾸 기침해요</button>
+          <button class="chip chip-extra" type="button">🐱 고양이 털이 너무 많이 빠져요</button>
+          <button class="chip chip-extra" type="button">🐶 강아지 눈물 자국이 심해요</button>
+          <button class="chip chip-extra" type="button">🐱 고양이가 가구를 자꾸 긁어요</button>
+          <button class="chip chip-extra" type="button">🐶 강아지가 계속 설사를 해요</button>
+          <button class="chip-toggle" type="button" id="chipToggleBtn" onclick="toggleChips()">+ 더보기</button>
         </div>
 
         <div class="search-box">
@@ -1859,7 +1979,13 @@
             </div></div>
           </div>
 
-          <div class="faq-item fade-in">
+          <div class="faq-more-wrap">
+            <button class="faq-more-btn" id="faqMoreBtn" onclick="toggleFAQ()">
+              질문 더보기 <span id="faqMoreIcon">↓</span>
+            </button>
+          </div>
+
+          <div class="faq-item faq-extra fade-in">
             <div class="faq-q">
               <span>🐶 강아지가 자꾸 기침을 해요. 켄넬코프인가요?</span>
               <span class="faq-icon">+</span>
@@ -1870,7 +1996,7 @@
             </div></div>
           </div>
 
-          <div class="faq-item fade-in">
+          <div class="faq-item faq-extra fade-in">
             <div class="faq-q">
               <span>🐱 고양이 털이 너무 많이 빠져요. 탈모인가요?</span>
               <span class="faq-icon">+</span>
@@ -1881,7 +2007,7 @@
             </div></div>
           </div>
 
-          <div class="faq-item fade-in">
+          <div class="faq-item faq-extra fade-in">
             <div class="faq-q">
               <span>🐶 강아지 눈물 자국이 심해요. 어떻게 없애나요?</span>
               <span class="faq-icon">+</span>
@@ -1892,7 +2018,7 @@
             </div></div>
           </div>
 
-          <div class="faq-item fade-in">
+          <div class="faq-item faq-extra fade-in">
             <div class="faq-q">
               <span>🐱 고양이가 가구를 자꾸 긁어요. 어떻게 막나요?</span>
               <span class="faq-icon">+</span>
@@ -1903,7 +2029,7 @@
             </div></div>
           </div>
 
-          <div class="faq-item fade-in">
+          <div class="faq-item faq-extra fade-in">
             <div class="faq-q">
               <span>🐶 강아지가 설사를 해요. 병원을 가야 하나요?</span>
               <span class="faq-icon">+</span>
@@ -1914,7 +2040,7 @@
             </div></div>
           </div>
 
-          <div class="faq-item fade-in">
+          <div class="faq-item faq-extra fade-in">
             <div class="faq-q">
               <span>🐶 강아지 슬개골 탈구, 수술을 꼭 해야 하나요?</span>
               <span class="faq-icon">+</span>
@@ -1925,7 +2051,7 @@
             </div></div>
           </div>
 
-          <div class="faq-item fade-in">
+          <div class="faq-item faq-extra fade-in">
             <div class="faq-q">
               <span>🍖 강아지·고양이 사료는 어떻게 골라야 하나요?</span>
               <span class="faq-icon">+</span>
@@ -2680,6 +2806,47 @@
         entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
       }, { threshold: 0.12 });
       document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    }
+
+    /* ════════════════════════════════════
+       모바일 햄버거 메뉴
+    ════════════════════════════════════ */
+    function toggleMenu() {
+      const btn  = document.getElementById('menuBtn');
+      const menu = document.getElementById('mobileMenu');
+      const open = menu.classList.toggle('open');
+      btn.classList.toggle('open', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    }
+    function closeMenu() {
+      document.getElementById('mobileMenu').classList.remove('open');
+      document.getElementById('menuBtn').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    /* ════════════════════════════════════
+       칩 더보기 토글
+    ════════════════════════════════════ */
+    function toggleChips() {
+      const extras = document.querySelectorAll('.chip-extra');
+      const btn    = document.getElementById('chipToggleBtn');
+      const isOpen = extras[0].classList.contains('show');
+      extras.forEach(el => el.classList.toggle('show', !isOpen));
+      btn.textContent = isOpen ? '+ 더보기' : '− 접기';
+    }
+
+    /* ════════════════════════════════════
+       FAQ 더보기 토글
+    ════════════════════════════════════ */
+    function toggleFAQ() {
+      const extras = document.querySelectorAll('.faq-extra');
+      const btn    = document.getElementById('faqMoreBtn');
+      const icon   = document.getElementById('faqMoreIcon');
+      const isOpen = extras[0].classList.contains('show');
+      extras.forEach(el => el.classList.toggle('show', !isOpen));
+      btn.firstChild.textContent = isOpen ? '질문 더보기 ' : '접기 ';
+      icon.textContent = isOpen ? '↓' : '↑';
+      if (isOpen) btn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 
     /* ── Init ── */
