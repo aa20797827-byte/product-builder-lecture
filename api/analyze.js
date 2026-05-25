@@ -20,8 +20,11 @@ Analyze the pet owner's concern and respond ONLY with a valid JSON object — no
 JSON format:
 {
   "analysis": "<full analysis text using the format below>",
-  "tags": ["<tag1>", "<tag2>"]
+  "tags": ["<tag1>", "<tag2>"],
+  "petType": "dog" | "cat" | "both"
 }
+
+For "petType": detect whether the concern is about a dog ("dog"), cat ("cat"), or both/unknown ("both").
 
 For "analysis", use EXACTLY this structure (each section must have AT LEAST 3 items):
 
@@ -53,8 +56,11 @@ Warm and practical tone. Keep analysis under 400 words.`
 JSON 형식:
 {
   "analysis": "<아래 형식의 전체 분석 텍스트>",
-  "tags": ["<태그1>", "<태그2>"]
+  "tags": ["<태그1>", "<태그2>"],
+  "petType": "dog" | "cat" | "both"
 }
+
+"petType"은 고민이 강아지에 관한 것이면 "dog", 고양이에 관한 것이면 "cat", 불명확하거나 둘 다면 "both"로 설정하세요.
 
 "analysis"는 반드시 이 구조를 따르세요 (각 항목 최소 3개 이상):
 
@@ -129,12 +135,16 @@ JSON 형식:
         ? (tMatch[1].match(/"([^"]+)"/g) || []).map(s => s.replace(/"/g, ''))
         : [];
 
-      parsed = { analysis: analysisText, tags };
+      const ptMatch = rawText.match(/"petType"\s*:\s*"([^"]+)"/);
+      const petType = ptMatch ? ptMatch[1] : 'both';
+
+      parsed = { analysis: analysisText, tags, petType };
     }
 
     return res.status(200).json({
       result: parsed.analysis || rawText,
       tags: Array.isArray(parsed.tags) ? parsed.tags : [],
+      petType: parsed.petType || 'both',
     });
 
   } catch (error) {
