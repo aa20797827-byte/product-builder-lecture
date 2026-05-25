@@ -1,16 +1,6 @@
 {
-  "version": 2,
-  "builds": [
-    { "src": "api/*.js",    "use": "@vercel/node" },
-    { "src": "index.html",  "use": "@vercel/static" },
-    { "src": "robots.txt",  "use": "@vercel/static" },
-    { "src": "ads.txt",     "use": "@vercel/static" }
-  ],
-  "routes": [
-    { "src": "/api/analyze",  "dest": "/api/analyze.js" },
-    { "src": "/sitemap.xml",  "dest": "/api/sitemap.js" },
-    { "src": "/robots.txt",   "dest": "/robots.txt" },
-    { "src": "/ads.txt",      "dest": "/ads.txt" },
-    { "src": "/(.*)",         "dest": "/index.html" }
+  "rewrites": [
+    { "source": "/sitemap.xml",          "destination": "/api/sitemap" },
+    { "source": "/((?!api/)(?!ads\\.txt)(?!robots\\.txt).*)", "destination": "/index.html" }
   ]
 }
