@@ -10,14 +10,14 @@
   <meta name="keywords" content="반려동물 AI, 강아지 고민, 고양이 고민, 펫케어, 반려동물 큐레이션, 강아지 피부, 강아지 피부병, 강아지 기침, 강아지 설사, 강아지 눈물자국, 강아지 슬개골 탈구, 강아지 분리불안, 강아지 사료 추천, 고양이 야간울음, 고양이 털빠짐, 고양이 구토, 고양이 화장실, 고양이 스크래칭, 고양이 사료 추천, 반려동물 상품 추천, 반려동물 영양제, 펫 AI 추천, PawPick, 펫픽AI" />
   <meta name="author" content="PawPick AI" />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://product-builder-lecture-nine.vercel.app/" />
+  <link rel="canonical" href="https://pawpickai.vercel.app/" />
 
   <!-- ── Open Graph (카카오·페이스북·링크 공유 미리보기) ── -->
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://product-builder-lecture-nine.vercel.app/" />
+  <meta property="og:url" content="https://pawpickai.vercel.app/" />
   <meta property="og:title" content="PawPick AI | 반려동물 고민을 AI가 해결해 드려요" />
   <meta property="og:description" content="강아지·고양이의 피부, 식욕, 행동 문제를 AI가 즉시 분석. 원인 3가지 이상·해결 루틴·맞춤 상품까지 한 번에!" />
-  <meta property="og:image" content="https://product-builder-lecture-nine.vercel.app/og-image.svg" />
+  <meta property="og:image" content="https://pawpickai.vercel.app/og-image.svg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:site_name" content="PawPick AI" />
@@ -27,7 +27,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="PawPick AI | 반려동물 고민을 AI가 해결해 드려요" />
   <meta name="twitter:description" content="강아지·고양이 고민을 입력하면 AI가 원인·해결 루틴·맞춤 상품을 즉시 추천합니다." />
-  <meta name="twitter:image" content="https://product-builder-lecture-nine.vercel.app/og-image.svg" />
+  <meta name="twitter:image" content="https://pawpickai.vercel.app/og-image.svg" />
 
   <!-- ── Google Site Verification ── -->
   <meta name="google-site-verification" content="fls3rnAKm9yykYXakruF_84q71Gwk5F7KF4o89EgMMM" />
@@ -53,7 +53,7 @@
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": "PawPick AI",
-    "url": "https://product-builder-lecture-nine.vercel.app/",
+    "url": "https://pawpickai.vercel.app/",
     "description": "반려동물의 고민을 AI가 즉시 분석해 원인·해결 루틴·맞춤 상품을 추천하는 서비스",
     "applicationCategory": "LifestyleApplication",
     "operatingSystem": "All",
@@ -78,12 +78,12 @@
     "@type": "WebSite",
     "name": "PawPick AI",
     "alternateName": "펫픽 AI",
-    "url": "https://product-builder-lecture-nine.vercel.app/",
+    "url": "https://pawpickai.vercel.app/",
     "potentialAction": {
       "@type": "SearchAction",
       "target": {
         "@type": "EntryPoint",
-        "urlTemplate": "https://product-builder-lecture-nine.vercel.app/#curation?q={search_term_string}"
+        "urlTemplate": "https://pawpickai.vercel.app/#curation?q={search_term_string}"
       },
       "query-input": "required name=search_term_string"
     }
@@ -96,13 +96,13 @@
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "PawPick AI",
-    "url": "https://product-builder-lecture-nine.vercel.app/",
-    "logo": "https://product-builder-lecture-nine.vercel.app/og-image.svg",
+    "url": "https://pawpickai.vercel.app/",
+    "logo": "https://pawpickai.vercel.app/og-image.svg",
     "sameAs": [],
     "contactPoint": {
       "@type": "ContactPoint",
       "contactType": "customer support",
-      "url": "https://product-builder-lecture-nine.vercel.app/contact.html",
+      "url": "https://pawpickai.vercel.app/contact.html",
       "availableLanguage": "Korean"
     }
   }
@@ -2830,7 +2830,7 @@
       const btn    = document.getElementById('copyResultBtn');
       if (!text) return;
 
-      const full = `🐾 PawPick AI 분석 결과\n\n질문: "${input}"\n\n${text}\n\n🔗 https://product-builder-lecture-nine.vercel.app/`;
+      const full = `🐾 PawPick AI 분석 결과\n\n질문: "${input}"\n\n${text}\n\n🔗 https://pawpickai.vercel.app/`;
       navigator.clipboard.writeText(full).then(() => {
         btn.textContent = '✓ 복사됐어요!';
         btn.classList.add('copied');
@@ -2847,10 +2847,10 @@
         navigator.share({
           title : 'PawPick AI — 반려동물 AI 분석 결과',
           text  : `"${input}" — PawPick AI 분석 결과를 확인해 보세요!`,
-          url   : 'https://product-builder-lecture-nine.vercel.app/',
+          url   : 'https://pawpickai.vercel.app/',
         }).catch(() => {});
       } else {
-        navigator.clipboard.writeText('https://product-builder-lecture-nine.vercel.app/').then(() => {
+        navigator.clipboard.writeText('https://pawpickai.vercel.app/').then(() => {
           btn.textContent = '✓ 링크 복사됨!';
           btn.classList.add('copied');
           setTimeout(() => { btn.textContent = '🔗 공유하기'; btn.classList.remove('copied'); }, 2500);

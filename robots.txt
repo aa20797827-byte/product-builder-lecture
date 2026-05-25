@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 
 # 사이트맵 위치
-Sitemap: https://product-builder-lecture-nine.vercel.app/sitemap.xml
+Sitemap: https://pawpickai.vercel.app/sitemap.xml
