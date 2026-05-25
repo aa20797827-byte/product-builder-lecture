@@ -1,4 +1,4 @@
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   // CORS 허용
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -95,4 +95,4 @@ Keep your response warm, practical, and concise (under 250 words).`
     console.error('Handler error:', error);
     return res.status(500).json({ error: error.message || '분석 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.' });
   }
-}
+};

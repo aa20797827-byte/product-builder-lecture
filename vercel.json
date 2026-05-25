@@ -1,6 +1,4 @@
 {
-  "buildCommand": "",
-  "outputDirectory": ".",
   "functions": {
     "api/analyze.js": {
       "runtime": "nodejs20.x"
