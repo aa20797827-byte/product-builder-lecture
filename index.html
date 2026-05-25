@@ -2744,57 +2744,60 @@
 
     /* ════════════════════════════════════
        Formspree – Contact Form Submit
+       (contact.html 에서 사용 / index.html에는 폼 없음)
     ════════════════════════════════════ */
     const contactForm = document.getElementById('contactForm');
     const formResult  = document.getElementById('formResult');
     const formSubmit  = document.getElementById('formSubmit');
 
-    contactForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
+    if (contactForm) {
+      contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
 
-      /* Client-side validation */
-      const name  = contactForm.name.value.trim();
-      const email = contactForm.email.value.trim();
-      const type  = contactForm.inquiry_type.value;
-      const msg   = contactForm.message.value.trim();
+        /* Client-side validation */
+        const name  = contactForm.name.value.trim();
+        const email = contactForm.email.value.trim();
+        const type  = contactForm.inquiry_type.value;
+        const msg   = contactForm.message.value.trim();
 
-      formResult.className = 'form-result';
-      formResult.textContent = '';
+        formResult.className = 'form-result';
+        formResult.textContent = '';
 
-      if (!name || !email || !type || !msg) {
-        formResult.textContent = t('contact.form.required');
-        formResult.classList.add('error');
-        formResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        return;
-      }
-
-      /* Send to Formspree */
-      formSubmit.disabled = true;
-      formSubmit.textContent = t('contact.form.sending');
-
-      try {
-        const res = await fetch(contactForm.action, {
-          method: 'POST',
-          headers: { 'Accept': 'application/json' },
-          body: new FormData(contactForm),
-        });
-
-        if (res.ok) {
-          formResult.textContent = t('contact.form.success');
-          formResult.classList.add('success');
-          contactForm.reset();
-        } else {
-          throw new Error('server error');
+        if (!name || !email || !type || !msg) {
+          formResult.textContent = t('contact.form.required');
+          formResult.classList.add('error');
+          formResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          return;
         }
-      } catch {
-        formResult.textContent = t('contact.form.error');
-        formResult.classList.add('error');
-      } finally {
-        formSubmit.disabled = false;
-        formSubmit.textContent = t('contact.form.submit');
-        formResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }
-    });
+
+        /* Send to Formspree */
+        formSubmit.disabled = true;
+        formSubmit.textContent = t('contact.form.sending');
+
+        try {
+          const res = await fetch(contactForm.action, {
+            method: 'POST',
+            headers: { 'Accept': 'application/json' },
+            body: new FormData(contactForm),
+          });
+
+          if (res.ok) {
+            formResult.textContent = t('contact.form.success');
+            formResult.classList.add('success');
+            contactForm.reset();
+          } else {
+            throw new Error('server error');
+          }
+        } catch {
+          formResult.textContent = t('contact.form.error');
+          formResult.classList.add('error');
+        } finally {
+          formSubmit.disabled = false;
+          formSubmit.textContent = t('contact.form.submit');
+          formResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      });
+    }
 
     /* ════════════════════════════════════
        최근 질문 히스토리 (localStorage)
@@ -3122,9 +3125,6 @@
       // Start after 2 seconds
       setTimeout(type, 2000);
     }
-
-    /* ── 분석 결과 렌더링 패치 (analyzeProblem 내 result.textContent 교체용) ── */
-    const _origAnalyze = analyzeProblem;
 
     /* ── Init ── */
     initChips();
