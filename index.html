@@ -1589,9 +1589,43 @@
   <footer>
     <div class="shell footer-inner">
       <div data-i18n="footer.copy">© 2026 PawPick AI. All rights reserved.</div>
-      <div>Problem-first · AI Curation · Pet Care</div>
+      <div style="display:flex;gap:18px;align-items:center;flex-wrap:wrap;justify-content:center;">
+        <a href="/privacy.html" style="color:#64748b;font-size:13px;font-weight:700;text-decoration:none;" onmouseover="this.style.color='#08235c'" onmouseout="this.style.color='#64748b'">개인정보 처리방침</a>
+        <a href="/terms.html"   style="color:#64748b;font-size:13px;font-weight:700;text-decoration:none;" onmouseover="this.style.color='#08235c'" onmouseout="this.style.color='#64748b'">이용약관</a>
+        <a href="mailto:aa20797827@gmail.com" style="color:#64748b;font-size:13px;font-weight:700;text-decoration:none;" onmouseover="this.style.color='#08235c'" onmouseout="this.style.color='#64748b'">문의하기</a>
+      </div>
     </div>
   </footer>
+
+  <!-- ══ 쿠키 동의 배너 ══ -->
+  <div id="cookieBanner" style="
+    display:none; position:fixed; bottom:0; left:0; right:0; z-index:9999;
+    background:#0f172a; color:#fff; padding:16px 24px;
+    display:flex; align-items:center; justify-content:space-between;
+    gap:16px; flex-wrap:wrap; font-size:13px; font-weight:600;
+    box-shadow:0 -4px 20px rgba(0,0,0,0.2);
+  ">
+    <span>
+      🍪 이 사이트는 서비스 개선 및 맞춤형 광고 제공을 위해 쿠키를 사용합니다.
+      <a href="/privacy.html" style="color:#93c5fd;text-decoration:underline;">자세히 보기</a>
+    </span>
+    <button onclick="acceptCookies()" style="
+      padding:9px 20px; background:#1f5eff; border:none; border-radius:9px;
+      color:#fff; font-size:13px; font-weight:800; cursor:pointer; white-space:nowrap;
+      font-family:inherit;
+    ">확인</button>
+  </div>
+  <script>
+    (function() {
+      if (!localStorage.getItem('cookie-consent')) {
+        document.getElementById('cookieBanner').style.display = 'flex';
+      }
+    })();
+    function acceptCookies() {
+      localStorage.setItem('cookie-consent', '1');
+      document.getElementById('cookieBanner').style.display = 'none';
+    }
+  </script>
 
   <script>
     /* ════════════════════════════════════
